@@ -3562,7 +3562,7 @@ const p = {
     escalaHorizontal: void 0
   },
   actividades: {
-    tamanyoTexto: "12",
+    tamanyoTexto: "17",
     porcentajeZonaSeleccionActividad: 6,
     colores: ["#bde8ef", "#ffd4e5", "#feffa2", "#e0cdff", "#fdfd96"],
     mostrarPanelAcciones: !1
@@ -3697,7 +3697,7 @@ let Fu = class {
     e.attr("width", p.grafico.anchoGrafico).attr("height", p.grafico.altoGrafico), e.append("rect").attr("width", "100%").attr("height", "100%").attr("id", "fondografico").attr("fill", p.grafico.colorGrafico).attr("rx", "10").attr("ry", "10"), x.anyadirDefs(e);
   }
   establecerParametrosConfiguracion(e) {
-    e.configuracionSemana && (p.configuracionSemana = e.configuracionSemana), e.actividades?.mostrarPanelAcciones ? p.actividades.mostrarPanelAcciones = e.actividades?.mostrarPanelAcciones : p.actividades.mostrarPanelAcciones = !1;
+    e.configuracionSemana && (p.configuracionSemana = e.configuracionSemana), e.actividades?.mostrarPanelAcciones ? p.actividades.mostrarPanelAcciones = e.actividades?.mostrarPanelAcciones : p.actividades.mostrarPanelAcciones = !1, e.actividades?.tamanyoTexto && (p.actividades.tamanyoTexto = e.actividades?.tamanyoTexto), e.panelSesiones?.colorCuerpo && (p.panelSesiones.colorCuerpo = e.panelSesiones.colorCuerpo);
     const n = x.convertirCadenaHoraEnTiempo(p.configuracionSemana.horaMaxima), r = x.convertirCadenaHoraEnTiempo(p.configuracionSemana.horaMinima), i = (n.getTime() - r.getTime()) / 36e5;
     p.grafico.anchoGrafico = parseFloat(C(this.elementoRaiz).style("width")), p.grafico.altoGrafico = parseFloat(C(this.elementoRaiz).style("height")) * Math.max(1, i / 7), p.panelHorario.anchoPanelHorario = p.grafico.anchoGrafico * ((100 - p.grafico.margenGrafico.margenIzquierdoGrafico - p.grafico.margenGrafico.margenDerechoGrafico) / 100), p.panelHorario.altoPanelHorario = p.grafico.altoGrafico * ((100 - p.grafico.margenGrafico.margenSuperiorGrafico - p.grafico.margenGrafico.margenInferiorGrafico) / 100), p.escalas.escalaHorizontal = Nr().domain(x.obtenerDiasSemanaHorario().map((a) => a.denominacionLarga)).range([0, p.panelHorario.anchoPanelHorario]).paddingInner(0).paddingOuter(0), p.escalas.escalaVertical = er().domain([x.minimoIntervaloTemporal(), x.maximoIntervaloTemporal()]).range([0, p.panelHorario.altoPanelHorario]), p.panelSesiones.anchoSesion = parseFloat(p.escalas.escalaHorizontal.bandwidth()) * (100 - p.panelSesiones.margenLateral * 2) * 0.01;
   }
@@ -3763,7 +3763,7 @@ let Fu = class {
     const n = p.panelSesiones.altoPie, r = p.panelSesiones.anchoSesion ? p.panelSesiones.anchoSesion.toString() : "0", i = p.panelSesiones.altoCabecera, a = e.append("g").attr("class", "panelPieSesionConSusActividades").attr("id", (o) => "panelPieSesionConSusActividades" + o.sesion.idSesion);
     return a.append("rect").attr("class", "rectPanelCabeceraSesionConSusActividades").attr("height", n * 2).attr("width", r).attr("rx", 10).attr("y", (o) => {
       const s = p.escalas.escalaVertical(x.convertirCadenaHoraEnTiempo(o.sesion.horaInicio));
-      return console.log(o.sesion.horaFin), p.escalas.escalaVertical(x.convertirCadenaHoraEnTiempo(o.sesion.horaFin)) - s - n * 2;
+      return p.escalas.escalaVertical(x.convertirCadenaHoraEnTiempo(o.sesion.horaFin)) - s - n * 2;
     }).attr("fill", "#ccc"), a.append("text").attr("x", parseInt(r) / 2).text((o) => o.sesion.horaInicio + " - " + o.sesion.horaFin).attr("y", i / 2).attr("font-size", ".6em").attr("fill", "white").attr("dominant-baseline", "central").attr("text-anchor", "middle"), a;
   }
   renderizarBotonesPanelCabeceraSesionesActividades(e) {
@@ -3810,7 +3810,7 @@ let Fu = class {
           u.ctrlKey || x.desmarcarActividadesComoSeleccionadas(this.actividadesG), f ? at("g#panelActividad_" + l.idActividad).attr("class", "panelActividad actividadSeleccionada") : C("g#panelActividad_" + l.idActividad).attr("class", "panelActividad"), C("g#panelActividad_" + l.idActividad).attr("class").split(" ").includes("actividadSeleccionada") ? x.desmarcarActividadesComoSeleccionadas(this.actividadesG, [l.idActividad]) : x.marcarActividadesComoSeleccionadas([l.idActividad]);
         });
         const c = o.select(".panelActividadZonaSeleccion").append("svg:foreignObject").attr("width", s + "px").attr("height", i / 2 + "px").append("xhtml:div").style("text-align", "center").style("font-size", (u) => s >= 10 ? "10px" : s / 1.5 + "px").html('<i class="fas fa fa-expand-arrows-alt"></i><br><i class="fas fa fa-copy"></i>');
-        o.select(".panelActividadZonaSeleccion").append("svg:foreignObject").attr("width", s + "px").attr("height", i / 2 + "px").attr("y", i - 30).append("xhtml:div").style("text-align", "center").style("font-size", (u) => s >= 10 ? "10px" : s / 1.5 + "px").html('<i class="fas fa fa-trash" > </i><br><i class="fas fa fa-plus" > </i>').on("click", (u, l, d) => {
+        o.select(".panelActividadZonaSeleccion").append("svg:foreignObject").attr("width", s + "px").attr("height", i / 2 + "px").attr("y", i - 35).append("xhtml:div").style("text-align", "center").style("font-size", (u) => s >= 10 ? "10px" : s / 1.5 + "px").html('<i class="fas fa fa-trash" > </i><br><i class="fas fa fa-plus" > </i>').on("click", (u, l, d) => {
           const f = !!u.srcElement.classList.contains("fa-trash"), h = !!u.srcElement.classList.contains("fa-plus");
           f && this.eliminarActividad$.next(l), h && this.anyadirActividadEnSesion$.next(l.sesion);
         }), this.anyadirFuncionalidadDragAndDrop(c);

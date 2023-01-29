@@ -30,12 +30,8 @@
       
       <!-- Cabecera: mensajes de acciones realizadas por el usuario. -->
       <div class="seccion seccionCabecera">
-   
-        <div >
-          <h5 class="blue-text text-darken-3">Última acción: </h5>
-          <h5 id="ultimaAccion" class="blue-text ">-- Aún no se han realizado acciones --</h5>
-        </div>
-       
+          <span class="blue-text text-darken-3">Última acción: </span>
+          <span id="ultimaAccion" class="blue-text ">-- Aún no se han realizado acciones --</span>
       </div>
 
       <!-- Cuerpo: contiene dos paneles: Datos de la actividad (izquierdo) y horario (derecho) -->
@@ -63,18 +59,106 @@
         <!-- Panel derecho del cuerpo -->
         <div>
 
-          <div class="seccion seccionGrafico">
-                 <label>
-                <input type="checkbox" class="filled-in" id="mostrarBotonesAccionActividad"/>
-                <span>Mostrar barra botones</span>
-              </label>
+          <div class="seccion seccionOpcionesGrafico">
+
+            <div class="opcion opcionConfiguracionActividades">
+              <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionActividades">Configuracion actividades</p>
+              <div class="opcion opcionMostrarBarra" style="margin-bottom: 15px;">
+                <label>
+                  <input type="checkbox"  id="mostrarBotonesAccionActividad" />
+                         <span>Mostrar barra botones</span>
+                </label>
+
+                <div class="opcion opcionTamanyoLetra input-field col s6">
+                  <!-- <i class="material-icons prefix">account_circle</i> -->
+                  <input id="tamanyoTexto" type="number" class="validate" value="10">
+                  <label for="icon_prefix">Tamaño letra</label>
+                </div>
+                
+              </div>
+
+            </div>
+    
+            <div class="opcion opcionConfiguracionSemana">
+              <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionSemana">Configuracion semana</p>
+              <div class="opcion opcionFranjaHoraria">
+                <div class="opcion opcionHoraInicio input-field ">
+                  <!-- <i class="material-icons prefix">account_circle</i> -->
+                  <input id="horaInicio" type="time" class="validate" >
+                  <label for="icon_prefix">Hora inicio</label>
+                </div>
+                <div class="opcion opcionHoraFin input-field ">
+                  <!-- <i class="material-icons prefix">account_circle</i> -->
+                  <input id="horaFin" type="time" class="validate" >
+                  <label for="icon_prefix">Hora fin</label>
+                </div>
+
+              </div>
+             
+
+
+                <div class="opcion opcionDiasSemana">
+                  <span style="margin-right: 15px;">Días hábiles: </span>
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="L" class="mostrarDia"  />
+                    <span style="padding-right: 2px;">L</span> 
+                  </label>
+  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="M" class="mostrarDia"  />
+                    <span style="padding-right: 2px;">M</span> 
+                  </label>
+                  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="X" class="mostrarDia" />
+                    <span style="padding-right: 2px;">X</span> 
+                  </label>
+                  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="J" class="mostrarDia" />
+                    <span style="padding-right: 2px;">J</span> 
+                  </label>
+                  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="V" class="mostrarDia" />
+                    <span style="padding-right: 2px;">V</span> 
+                  </label>
+                  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="S" class="mostrarDia" />
+                    <span style="padding-right: 2px;">S</span> 
+                  </label>
+                  
+                  <label style="margin-right: 15px;">
+                    <input type="checkbox"  id="D" class="mostrarDia" />
+                    <span style="padding-right: 2px;">D</span> 
+                  </label>
+                 
+              
+                </div>
+            </div>
+
+            <div class="opcion opcionConfiguracionPlantilla">
+              <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionPlantilla">Configuracion plantilla</p>
+              <div class="opcion opcionColorSesiones">
+                <label for="icon_prefix">Color de fondo</label>
+                <input id="colorSesiones" type="color">
+          
+              </div> 
+
+            </div>
+
+           
+                 
+
+         
 
           </div>
          
     
           <!-- Panel en el que se renderiza el horario -->
           <div class="svg-container" id="horario"></div>
-          <div class="svg-container" id="horario1"></div>
+       
         </div>
 
       </div>

@@ -49,7 +49,7 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
   },
 
   actividades: {
-    tamanyoTexto: '12',
+    tamanyoTexto: '17',
     porcentajeZonaSeleccionActividad: 6,
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
     mostrarPanelAcciones: false

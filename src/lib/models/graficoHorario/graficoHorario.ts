@@ -108,6 +108,9 @@ export class HorarioG {
     
     configuracionGrafico.configuracionSemana?CONFIGURACION_GRAFICO.configuracionSemana = configuracionGrafico.configuracionSemana:null;
     configuracionGrafico.actividades?.mostrarPanelAcciones?CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones = configuracionGrafico.actividades?.mostrarPanelAcciones:CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones=false;
+    configuracionGrafico.actividades?.tamanyoTexto?CONFIGURACION_GRAFICO.actividades.tamanyoTexto = configuracionGrafico.actividades?.tamanyoTexto:null;
+    configuracionGrafico.panelSesiones?.colorCuerpo?CONFIGURACION_GRAFICO.panelSesiones.colorCuerpo = configuracionGrafico.panelSesiones.colorCuerpo:null;
+
 
     // Cálculo del rango en horas del horario
     const fechaFin: Date = Utilidades.convertirCadenaHoraEnTiempo(CONFIGURACION_GRAFICO.configuracionSemana.horaMaxima);
@@ -464,7 +467,7 @@ export class HorarioG {
       .attr('y', (d: any) => {
         const coordenadaHoraInicio = CONFIGURACION_GRAFICO.escalas.escalaVertical(Utilidades.convertirCadenaHoraEnTiempo(d.sesion.horaInicio));
 
-        console.log(d.sesion.horaFin);
+        
         const coordenadaHoraFin = CONFIGURACION_GRAFICO.escalas.escalaVertical(Utilidades.convertirCadenaHoraEnTiempo(d.sesion.horaFin));
         return coordenadaHoraFin - coordenadaHoraInicio - altoPie*2;
       })
@@ -654,7 +657,7 @@ export class HorarioG {
         const panelBotonesAnyadirEliminar = panelesActividades.select('.panelActividadZonaSeleccion').append('svg:foreignObject')
         .attr("width", anchoZonaSeleccion + 'px')
         .attr("height", altoPanelActividadesEnActividadSesiones/2 + 'px')
-        .attr("y",altoPanelActividadesEnActividadSesiones-30)
+        .attr("y",altoPanelActividadesEnActividadSesiones-35)
         .append("xhtml:div")
         .style('text-align', 'center')
           .style("font-size", (d: any) => {
@@ -748,11 +751,6 @@ export class HorarioG {
       .attr('width', panelSeccionBBox.width+1)
       .attr('fill', actividad.color);
 
-    // if (numeroSeccion !==2){
-    //   rectPanelSeccion
-    //   .attr('ry',15)
-    //   .attr('rx',15)
-    // }
 
     const panelContenidoSeccion = panelSeccion
       .append('g')

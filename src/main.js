@@ -1,17 +1,31 @@
-//import { HorarioG } from './lib/root'
+import { HorarioG } from './lib/root'
 
-import { HorarioG} from '../dist/HorarioG.es'
+//import { HorarioG} from '../dist/HorarioG.es'
 
 //--------------------------------------------------------------
 // DATOS
 //--------------------------------------------------------------
 
 // 1.- conficuración de la semana
-var configuracionSemana = {
-  horaMinima: '08:00',
-  horaMaxima: '14:00',
-  diasSemanaHabiles: ['L','M','X','J','V']
+var configuracion = {
+  configuracionSemana: {
+    horaMinima: '08:00',
+    horaMaxima: '14:00',
+    diasSemanaHabiles: ['L','M','X','J','V'],
+  },
+
+  actividades: {
+    mostrarPanelAcciones: true,
+    tamanyoTexto: '13'
+  },
+  panelSesiones: {
+    colorCuerpo: '#f4f4f4'
+  }
 }
+
+
+// Paso 2: Instanciamos un objeto horario.
+var graficoHorario = new HorarioG('div#horario');
 
 // 2.- plantilla que se rendeizará en el gráfico (Colecció de sesiones)
 var plantilla =  {
@@ -965,21 +979,99 @@ function establecerActividadActual(actividad) {
 
 }
 
-function init() {        
-  // Paso 1: Sin instancia el componente que genera el horario indicándole el div contenedor.
-  var graficoHorario = new HorarioG('div#horario');
+function iniciarParametros(){
+
+    //----------------------------------------------------------
+    // Configuración parámetro: mostrarBotonesAccionActividad 
+    //----------------------------------------------------------
+    document.getElementById("mostrarBotonesAccionActividad").checked=configuracion.actividades?.mostrarPanelAcciones?configuracion.actividades.mostrarPanelAcciones:null;
+
+    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    document.getElementById("mostrarBotonesAccionActividad")
+    .addEventListener('input', (event) =>  {
+
+        configuracion.actividades.mostrarPanelAcciones=event.target.checked;
+
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+    } );
+
+
+    //----------------------------------------------------------
+    // Configuración parámetros: mostrarDia 
+    //----------------------------------------------------------
+    Array.prototype.filter.call(document.getElementsByClassName("mostrarDia"), function(element){
+
+        //Establecemos valores iniciales de los elementos del DOM (días) en base a la configuración
+        element.checked=configuracion.configuracionSemana?.diasSemanaHabiles?configuracion.configuracionSemana.diasSemanaHabiles.includes(element.id)?true:false:null;
+
+        //Establecemos la reacción ante la selección/deselección de los elementos (días)
+        element.addEventListener('input', (event) =>  {
+            if ( event.target.checked) {
+                configuracion.configuracionSemana.diasSemanaHabiles.push(event.target.id)
+            }
+            else{
+                const index = configuracion.configuracionSemana.diasSemanaHabiles.indexOf(event.target.id)
+                index > -1? configuracion.configuracionSemana.diasSemanaHabiles.splice(index,1):null
+            }
+            
+            graficoHorario.renderizarGrafico( configuracion, plantilla )
+         } );
+
+       })
+
+    //----------------------------------------------------------
+    // Configuración parámetros: tamanioTexto 
+    //----------------------------------------------------------
+
+    document.getElementById("tamanyoTexto").value=configuracion.actividades?.tamanyoTexto?configuracion.actividades.tamanyoTexto:false;
+    document.getElementById("tamanyoTexto")
+    .addEventListener('input', (event) =>  {
+        configuracion.actividades.tamanyoTexto=event.target.value;
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+     } );
+
+    document.getElementById("horaInicio").value=configuracion.configuracionSemana?.horaMinima?configuracion.configuracionSemana.horaMinima:null;
+    document.getElementById("horaInicio")
+    .addEventListener('input', (event) =>  {
+        configuracion.configuracionSemana.horaMinima=event.target.value;
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+     } );
+
+    document.getElementById("horaFin").value=configuracion.configuracionSemana?.horaMaxima?configuracion.configuracionSemana.horaMaxima:null;
+    document.getElementById("horaFin")
+    .addEventListener('input', (event) =>  {
+        configuracion.configuracionSemana.horaMaxima=event.target.value;
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+     } );
+
+     document.getElementById("colorSesiones").value=configuracion.panelSesiones?.colorCuerpo?configuracion.panelSesiones.colorCuerpo:null;
+     document.getElementById("colorSesiones")
+     .addEventListener('input', (event) =>  {
+         configuracion.panelSesiones.colorCuerpo=event.target.value;
+         graficoHorario.renderizarGrafico( configuracion, plantilla )
+      } );
+   
+  
+
+}
+
+function init() {  
+    
+    
+
+
 
   // Paso 2: Se invoca a su renderizado.
   // IMPORTANTE: El renderizado depende de dos objetos que se pasarán por parámetro.
   // 1) Objeto de configuración: hora de inicio y fin y días habilitados
   // 2) Plantilla Horaria que se renderizará de fondo. 
-  graficoHorario.generarGrafico( {configuracionSemana: configuracionSemana, actividades: { mostrarPanelAcciones: false}}, plantilla );
+  graficoHorario.generarGrafico( configuracion, plantilla );
 
   // Paso 3: Definir las actividades que se "pintarán"
   // Observaciones: Generalmente, la configuración y plantilla de fondo permanece estable y no se suele cambiar.
   //                por ese motivo se ha separado la inclusión de actividades que, a medida que se cambia la entidad de 
   //                referencia se cambia el conjunto de actividades pero no el fondo del gráfico.
-   graficoHorario.actualizarActividades(actividades);
+  graficoHorario.actualizarActividades(actividades);
 
 
   // Paso 4: Subscripción a los observables ofrecidos por el objeto "HorarioG"
@@ -1020,61 +1112,16 @@ function init() {
       ses => notificacion('. . . Añadiendo una actividad en la sesión: '+ses.idSesion, null)
   );
 
-  // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
-  document.getElementById("mostrarBotonesAccionActividad")
-    .addEventListener('input', (event) =>  graficoHorario.renderizarGrafico( {configuracionSemana: configuracionSemana, actividades: { mostrarPanelAcciones: event.target.checked }}, plantilla ) );
+
+
+  iniciarParametros();
+
+
+  
+   
 
  
 }
 
 init();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="/vite.svg" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://www.typescriptlang.org/" target="_blank">
-//       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-//     </a>
-//     <h1>Vite + TypeScript</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite and TypeScript logos to learn more
-//     </p>
-//   </div>
-// `
-
-// setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
-
-// x();
 
