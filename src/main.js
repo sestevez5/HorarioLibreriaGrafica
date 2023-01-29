@@ -1,6 +1,6 @@
-import { HorarioG } from './lib/root'
+//import { HorarioG } from './lib/root'
 
-//import { HorarioG} from '../dist/HorarioG.es'
+import { HorarioG} from '../dist/HorarioG.es'
 
 //--------------------------------------------------------------
 // DATOS
