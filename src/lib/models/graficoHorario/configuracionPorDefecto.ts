@@ -34,6 +34,8 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
 
   panelSesiones: {
 
+    alto: 1,   // 1=alto del contenedor.
+    ancho: 1,  // 1=ancho del contenedor.
     margenLateral: 0,
     altoCabecera: 11,
     anchoSesion: undefined,
@@ -50,7 +52,7 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
 
   actividades: {
     tamanyoTexto: '17',
-    porcentajeZonaSeleccionActividad: 6,
+    porcentajeZonaSeleccionActividad: 4,
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
     mostrarPanelAcciones: false
   }

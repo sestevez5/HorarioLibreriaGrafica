@@ -14,6 +14,7 @@ export interface ConfiguracionGrafico {
       margenSuperiorGrafico:   number;
       margenInferiorGrafico:   number;
     };
+
     anchoGrafico:  number | undefined;
     altoGrafico:   number | undefined;
   }
@@ -29,6 +30,8 @@ export interface ConfiguracionGrafico {
   }
 
   panelSesiones?: {
+    alto: number;
+    ancho: number;
     margenLateral: number; // porcentaje
     anchoSesion: number | undefined;
     altoCabecera: number;
@@ -48,6 +51,7 @@ export interface ConfiguracionGrafico {
     porcentajeZonaSeleccionActividad: number | undefined;
     colores: string[];
     mostrarPanelAcciones: boolean;
+    separacionActividades?: number | undefined
   }
 
 

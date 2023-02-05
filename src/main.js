@@ -1,6 +1,6 @@
-//import { HorarioG } from './lib/root'
+import { HorarioG } from './lib/root'
 
-import { HorarioG} from '../dist/HorarioG.es'
+//import { HorarioG} from '../dist/HorarioG.es'
 
 //--------------------------------------------------------------
 // DATOS
@@ -19,6 +19,8 @@ var configuracion = {
     tamanyoTexto: '13'
   },
   panelSesiones: {
+    alto:1,
+    ancho:1,
     colorCuerpo: '#f4f4f4'
   }
 }
@@ -1020,15 +1022,58 @@ function iniciarParametros(){
        })
 
     //----------------------------------------------------------
-    // Configuración parámetros: tamanioTexto 
+    // Configuración parámetros: tamanyoTexto 
     //----------------------------------------------------------
-
-    document.getElementById("tamanyoTexto").value=configuracion.actividades?.tamanyoTexto?configuracion.actividades.tamanyoTexto:false;
+    if (configuracion.actividades?.tamanyoTexto)
+    {
+        document.getElementById("tamanyoTexto").value=configuracion.actividades.tamanyoTexto;
+        document.getElementById("valorTamanyoTexto").innerHTML=configuracion.actividades.tamanyoTexto;
+    }
+    
     document.getElementById("tamanyoTexto")
     .addEventListener('input', (event) =>  {
         configuracion.actividades.tamanyoTexto=event.target.value;
+        document.getElementById("valorTamanyoTexto").innerHTML=event.target.value;
         graficoHorario.renderizarGrafico( configuracion, plantilla )
      } );
+
+    //----------------------------------------------------------
+    // Configuración parámetros: altoSesiones 
+    //----------------------------------------------------------
+    if (configuracion.panelSesiones?.alto)
+    {
+        document.getElementById("altoSesiones").value=configuracion.panelSesiones?.alto;
+        document.getElementById("valorAltoSesiones").innerHTML=configuracion.panelSesiones?.alto*100 +'%';
+    }
+    
+    document.getElementById("altoSesiones")
+    .addEventListener('input', (event) =>  {
+        configuracion.panelSesiones.alto=event.target.value;
+        document.getElementById("valorAltoSesiones").innerHTML=parseInt(parseFloat(event.target.value)*100)+'%';
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+     } );
+
+        //----------------------------------------------------------
+    // Configuración parámetros: anchoSesiones 
+    //----------------------------------------------------------
+    if (configuracion.panelSesiones?.alto)
+    {
+        document.getElementById("anchoSesiones").value=configuracion.panelSesiones?.ancho;
+        document.getElementById("valorAnchoSesiones").innerHTML= configuracion.panelSesiones?.ancho*100 +'%';
+    }
+    
+    document.getElementById("anchoSesiones")
+    .addEventListener('input', (event) =>  {
+        configuracion.panelSesiones.ancho=event.target.value;
+        document.getElementById("valorAnchoSesiones").innerHTML=parseInt(parseFloat(event.target.value)*100)+'%';
+        graficoHorario.renderizarGrafico( configuracion, plantilla )
+     } );
+
+
+
+
+
+
 
     document.getElementById("horaInicio").value=configuracion.configuracionSemana?.horaMinima?configuracion.configuracionSemana.horaMinima:null;
     document.getElementById("horaInicio")
@@ -1065,7 +1110,7 @@ function init() {
   // IMPORTANTE: El renderizado depende de dos objetos que se pasarán por parámetro.
   // 1) Objeto de configuración: hora de inicio y fin y días habilitados
   // 2) Plantilla Horaria que se renderizará de fondo. 
-  graficoHorario.generarGrafico( configuracion, plantilla );
+  graficoHorario.renderizarGrafico( configuracion, plantilla );
 
   // Paso 3: Definir las actividades que se "pintarán"
   // Observaciones: Generalmente, la configuración y plantilla de fondo permanece estable y no se suele cambiar.

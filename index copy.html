@@ -12,25 +12,20 @@
 
       <!-- Estilo Materialize ( Solo para la demo ) -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-      
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!-- Iconos awesome 5 -->
             <script src="https://kit.fontawesome.com/2bfcce1720.js" crossorigin="anonymous"></script>
       
       <!-- Estilo de la propia demo -->
       <link rel="stylesheet" type="text/css" href="/src/style.css" />
-      <script type="module" src="/src/main.js"></script>
 
+         <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-
+    <!-- <div id="app"></div> -->
 
     <div class="contenido">
-
-      <i class="fas fa fa-expand-arrows-alt"></i>
 
       
       <!-- Cabecera: mensajes de acciones realizadas por el usuario. -->
@@ -43,8 +38,8 @@
       <div class="seccion seccionCuerpo">
 
         <div class="seccion seccionOpcionesGrafico">
-          <div class="opcion opcionConfiguracionActividades">
 
+          <div class="opcion opcionConfiguracionActividades">
             <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionActividades">Configuracion actividades</p>
             <div class="opcion opcionMostrarBarra" style="margin-bottom: 15px;">
               <label>
@@ -52,39 +47,15 @@
                        <span>Mostrar barra botones</span>
               </label>
 
-              <div class="opcion opcionTamanyoLetra" >
-                <div class="opcionSlider">
-                  <div class="etiquetaSlider">Tamaño texto:</div>
-                  <div class="slider"  style="max-height: 20px;">
-                    <input id="tamanyoTexto" type="range" min="5" max="30" step="1">
-                  </div>
-                  <div class="valorSlider" id="valorTamanyoTexto"></div>
-                </div>
+              <div class="opcion opcionTamanyoLetra input-field col s6">
+                <!-- <i class="material-icons prefix">account_circle</i> -->
+                <input id="tamanyoTexto" type="number" class="validate" value="10">
+                <label for="icon_prefix">Tamaño letra</label>
               </div>
 
-              <div class="opcion opcionAltoSesiones" >
-                <div class="opcionSlider">
-                  <div class="etiquetaSlider">Alto sesiones:</div>
-                  <div class="slider"  style="max-height: 20px;">
-                    <input id="altoSesiones" type="range" min="0" max="4" step="0.1">
-                  </div>
-                  <div class="valorSlider" id="valorAltoSesiones"></div>
-                </div>
-              </div>
-
-              <div class="opcion opcionAnchoSesiones" >
-                <div class="opcionSlider">
-                  <div class="etiquetaSlider">Ancho sesiones:</div>
-                  <div class="slider"  style="max-height: 20px;">
-                    <input id="anchoSesiones" type="range" min="0" max="4" step="0.1">
-                  </div>
-                  <div class="valorSlider" id="valorAnchoSesiones"></div>
-                </div>
-              </div>
-
-  
-
-    
+              <p class="range-field">
+                <input type="range" id="test5" orient="vertical" min="0" max="100" />
+              </p>
               
             </div>
 
@@ -158,8 +129,6 @@
             </div> 
 
           </div>
-       
-
 
         </div>
    
@@ -167,28 +136,28 @@
         <!-- Panel derecho del cuerpo -->
         <div class="seccion seccionHorario">
 
-          <!-- Panel izquierdo del cuerpo-->
-          <div class="seccion seccionDatos">
-            <h5>Datos de la actividad en la última interacción:</h5>
-            <div class="subSeccionActividad">
-              <div class="campo"><div class="etiquetaCampoActividad">Identificado de la actividad:</div> <div class="contenidoCampoActividad" id="act_idActividad">-- No establecida --</div></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Tipo de Actividad:</div> <div class="contenidoCampoActividad" id="act_tipoActividad"></div></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Sesión:</div> <span class="contenidoCampoActividad" id="act_sesion"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Periodo de vigencia:</div> <span class="contenidoCampoActividad" id="act_periodoVigencia"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Docentes que la imparten:</div> <span class="contenidoCampoActividad"  id="act_docentes"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Grupos:</div> <span class="contenidoCampoActividad"  id="act_grupos"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Espacio físico utilizado:</div> <span class="contenidoCampoActividad" id="act_espacioFisico"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Asignaturas impartidas:</div> <span class="contenidoCampoActividad" id="act_asignaturas"></span></div>
-              <div class="campo"><div class="etiquetaCampoActividad">Observaciones:</div> <span class="contenidoCampoActividad" id="act_observaciones"></span></div>
-            </div>
-        
+         <!-- Panel izquierdo del cuerpo-->
+         <div class="seccion seccionDatos">
+          <h5>Datos de la actividad en la última interacción:</h5>
+          <div class="subSeccionActividad">
+            <div class="campo"><div class="etiquetaCampoActividad">Identificado de la actividad:</div> <div class="contenidoCampoActividad" id="act_idActividad">-- No establecida --</div></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Tipo de Actividad:</div> <div class="contenidoCampoActividad" id="act_tipoActividad"></div></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Sesión:</div> <span class="contenidoCampoActividad" id="act_sesion"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Periodo de vigencia:</div> <span class="contenidoCampoActividad" id="act_periodoVigencia"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Docentes que la imparten:</div> <span class="contenidoCampoActividad"  id="act_docentes"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Grupos:</div> <span class="contenidoCampoActividad"  id="act_grupos"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Espacio físico utilizado:</div> <span class="contenidoCampoActividad" id="act_espacioFisico"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Asignaturas impartidas:</div> <span class="contenidoCampoActividad" id="act_asignaturas"></span></div>
+            <div class="campo"><div class="etiquetaCampoActividad">Observaciones:</div> <span class="contenidoCampoActividad" id="act_observaciones"></span></div>
           </div>
+        </div>
          
-          <!-- Panel en el que se renderiza el horario -->
+              <!-- Panel en el que se renderiza el horario -->
           <div class="seccion seccionGrafico" id="horario">
-
+   
           </div>
-
+          
+       
         </div>
 
       </div>
@@ -196,6 +165,6 @@
 
     
     </div>
-
+ 
   </body>
 </html>

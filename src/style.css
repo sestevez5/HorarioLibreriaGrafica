@@ -1,3 +1,13 @@
+html {
+  height: 100%;
+
+}
+body {
+  padding: 10px;
+  min-height: 100vh;
+  max-height: 100vh;
+  height: 500px;
+}
 
 
 div {
@@ -13,18 +23,19 @@ div {
   padding: 7px;
 }
 
-
-
 .contenido {
-  height: 100vh;
+  height: 98vh;
+  max-height: 98vh;
+  overflow-y: hidden;
+  width: 100%;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 20fr;
+  grid-template-rows: 1fr 15fr;
   padding: 10px;
-
 }
 
+/* Subsecciones de la sección contenido */
 .seccionCabecera {
   grid-row: 1;
   grid-column: 1;
@@ -35,27 +46,69 @@ div {
   grid-column: 1;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 2fr 3fr;
-  grid-template-rows: 1fr;
-
-
-
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 12fr;
   padding: 0px;
-  
   grid-row: 2;
   grid-column: 1;
+
+  overflow: hidden;
 }
 
-.seccionDatos  {
+/* Subsecciones de la sección cuerpo */
+.seccionOpcionesGrafico {
+  grid-column: 1;
+  grid-row: 1;
+
   border-style: solid;
   border-color: grey;
   border-width: 0.5px;
   border-radius: 8px;
-  grid-row: 1;
-  grid-column: 1;
+
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 2fr 3.5fr 2fr;
+  grid-template-rows: 1fr;
+
+  
 }
 
+.seccionHorario {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr;
 
+  border-color: red;
+}
+
+/* Subsecciones de la sección Horario */
+.seccionDatos  {
+  grid-row: 1;
+  grid-column: 1;
+
+  border-style: solid;
+  border-color: grey;
+  border-width: 0.5px;
+  border-radius: 8px;
+  max-height: 100%;
+  overflow-y: auto;
+
+}
+
+.seccionGrafico {
+  grid-row: 1;
+  grid-column: 2;
+ 
+  border-style: solid;
+  border-radius: 8px;
+  border-width: 1px;
+  overflow-y: auto; 
+  overflow-x: hidden;
+
+}
 
 .seccionGrafico div {
   margin-right: 15px;
@@ -65,12 +118,13 @@ div {
   grid-column: 1;
 }
 
-.svg-container {
-  margin: 7.25px 0px 14px;
+.svg {
   width: 100%;
-  height: 80%;
-  overflow-y: hidden; 
-  overflow-x: hidden;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  overflow-y: auto; 
+  overflow-x: auto;
 }
 
 #ultimaAccion {
@@ -97,19 +151,8 @@ div {
   padding-left: 25px;
 }
 
-
-
-.seccionOpcionesGrafico {
-  border-style: solid;
-  border-color: grey;
-  border-width: 0.5px;
-  border-radius: 8px;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 2fr 3.5fr 2fr;
-  grid-template-rows: 1fr;
-
-
+input[type=range]{
+  margin: 0px;
 }
 
 .cabeceraSeccionConfiguracion {
@@ -131,6 +174,7 @@ div {
 
 
 }
+
 .opcionConfiguracionSemana {
   grid-row:1;
   grid-column: 2;
@@ -164,13 +208,12 @@ div {
   justify-content:center;
 }
 
-
-
 .opcionHoraInicio {
   grid-row: 1;
   grid-column: 1;
 
 }
+
 .opcionHoraFin {
   grid-row: 1;
   grid-column: 2;
@@ -202,4 +245,27 @@ div {
 }
 
 
+
+.opcionSlider {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 5fr 10fr 2fr;
+  grid-template-rows: 1fr;
+}
+
+.etiquetaSlider {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.slider {
+  grid-row: 1;
+  grid-column: 2;
+
+}
+
+.valorSlider {
+  grid-row: 1;
+  grid-column: 3;
+}
 
