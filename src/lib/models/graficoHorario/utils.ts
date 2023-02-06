@@ -154,22 +154,6 @@ export class Utilidades
     }
 
   }
-  marcarActividadesComoSeleccionadas(identificadoresActividades: string[]) {
-  identificadoresActividades.forEach(
-    iact => {
-      const x = d3.select('g#panelActividad_' + iact)
-
-      const y: any = x.select('.rectActividad');
-
-      x.append('rect')
-        .attr('width', y.attr('width'))
-        .attr('height', y.attr('height'))
-        .attr('class', 'rectActividadSeleccionada').attr('fill', 'url(#x)')
-
-    }
-  )
-
-  }
   static desmarcarActividadesComoSeleccionadas(actividades: ActividadG[], identificadoresActividades?: string[], ) {
 
     if (!identificadoresActividades) {

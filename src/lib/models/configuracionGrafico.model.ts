@@ -30,8 +30,8 @@ export interface ConfiguracionGrafico {
   }
 
   panelSesiones?: {
-    alto: number;
-    ancho: number;
+    alto?: number;
+    ancho?: number;
     margenLateral: number; // porcentaje
     anchoSesion: number | undefined;
     altoCabecera: number;

@@ -58,11 +58,10 @@ export class HorarioG {
       this.plantilla = plantillaActual;
       this.renderizarPlantilla(this.plantilla);
     }
-    this.renderizarPanelesActividades();
+    this.renderizarActividades();
   }
 
   public actualizarActividades(actividades: Actividad[]) {
-
 
     this.actividadesG = [];
     actividades.forEach(
@@ -75,7 +74,7 @@ export class HorarioG {
     Utilidades.calcularFactorAnchoActividadesG(this.actividadesG, this.actividadesG);
     Utilidades.calcularColoresActividadesG(this.actividadesG);
 
-    this.renderizarPanelesActividades();
+    this.renderizarActividades();
 
   }
 
@@ -151,7 +150,6 @@ export class HorarioG {
   // MÉTODOS DE RENDERIZADO
   //----------------------------------------------------------------------------------------------------------
   public renderizarGrafico(configuracionGrafico: ConfiguracionGrafico, plantilla?: Plantilla) {
-    console.log('ren');
     window.addEventListener('resize', this.generarGrafico.bind(this, configuracionGrafico, plantilla));
     this.generarGrafico(configuracionGrafico, plantilla);
   }
@@ -285,7 +283,7 @@ export class HorarioG {
     );
   }
 
-  private renderizarPanelesActividades() {
+  private renderizarActividades() {
     
 
     d3.selectAll('g.panelSesionActividades').remove();
@@ -293,13 +291,13 @@ export class HorarioG {
     d3.selectAll('g.panelDiaSemana').nodes().forEach(
        (nodo: any) => {
          const actividadesACrear = this.actividadesG.filter(actG => actG.sesion.diaSemana === nodo['id']);
-         this.renderizarActividades('g#' + nodo['id'], actividadesACrear)
+         this.renderizarActividadesPorDiaSemana('g#' + nodo['id'], actividadesACrear)
        }
      );
 
 
   }
-
+  
   private renderizarSesiones(panelDiaSemana: string, sesiones: Sesion[]) {
 
     const anchoSesion = CONFIGURACION_GRAFICO.panelSesiones.anchoSesion ? CONFIGURACION_GRAFICO.panelSesiones.anchoSesion.toString() : '0';
@@ -353,37 +351,15 @@ export class HorarioG {
   } 
 
 
-  private renderizarActividades(panelDiaSemana: string, actividadesG: ActividadG[]) {
+  private renderizarActividadesPorDiaSemana(panelDiaSemana: string, actividadesG: ActividadG[]) {
 
     // Paso 0: Transformamos la colección de actividades agrupándolas por sesiones.
     const actividadesSesion: IActividadesSesion[] = Utilidades.obtenerActividadesSesiones(actividadesG);
 
     // Paso 1:  Crear los paneles que representarán a las actividades de una sesión
-    const panelesSesionActividades = this.generarPanelesActividadesSesion(panelDiaSemana, actividadesSesion);
+    //const panelesSesionActividades = this.generarPanelesActividadesSesion(panelDiaSemana, actividadesSesion);
 
-    // Paso 2: Crear la cabecera de los paneles anteriores.
-    const panelCabeceraSesionActividades = this.renderizarPanelCabeceraSesionActividades(panelesSesionActividades);
-
-    // Paso 3: Añadir los botones a la cabecera anterior.
-    this.renderizarBotonesPanelCabeceraSesionesActividades(panelCabeceraSesionActividades);
-
-    // Paso 2: Crear la cabecera de los paneles anteriores.
-    const panelPieSesionActividades = this.renderizarPanelPieSesionActividades(panelesSesionActividades);
-
-    // Paso 4: añadir el panel que contendrá a todas las actividades de la sesion "cuerpo de la sesión actividad".
-    this.renderizarPanelesCuerpoSesionActividades(panelesSesionActividades);
-
-    // Paso 5: añadir los paneles que representarán a cada una de las actividades.
-    this.anyadirPanelesActividades(actividadesSesion);
-
-
-  } 
-
-
-  private generarPanelesActividadesSesion(panelDiaSemana: string, actividadesSesion: IActividadesSesion[]) {
-
-   
-    const panelSesionActividades = d3.select(panelDiaSemana)
+    const panelesSesionActividades = d3.select(panelDiaSemana)
       .selectAll('g#act' + 'xx')
       .data(actividadesSesion)
       .enter()
@@ -393,11 +369,12 @@ export class HorarioG {
       .attr('id', d => 'panelSesionActividades' + d.sesion.idSesion)
       .attr('data-actividades', d => d.actividades.map(act => act.idActividad).join(','))
       .attr('data-actividadVisible', d => d.actividades[0].idActividad);
-    return panelSesionActividades;
 
-  }
+    // Paso 2: Crear la cabecera de los paneles anteriores.
+    const panelCabeceraSesionActividades = this.renderizarActividadesPorSesionActividad(panelesSesionActividades, actividadesSesion);
+  } 
 
-  private renderizarPanelCabeceraSesionActividades(panelSesionActividades: any) {
+  private renderizarActividadesPorSesionActividad(panelSesionActividades: any, actividadesSesion: IActividadesSesion[]) {
     const anchoSesion = CONFIGURACION_GRAFICO.panelSesiones.anchoSesion ? (CONFIGURACION_GRAFICO.panelSesiones.anchoSesion).toString() : '0';
     const altoCabeceraSesion = CONFIGURACION_GRAFICO.panelSesiones.altoCabecera;
     const colorCabecera = CONFIGURACION_GRAFICO.panelSesiones.colorCabecera
@@ -414,7 +391,6 @@ export class HorarioG {
     //---------------------------------------------------------------------------------
     // Definicion del rectángulo que representa a la cabecera de la sesión.
     //---------------------------------------------------------------------------------
-
     panelCabeceraSesionConActividades.append('rect')
       .attr('class', 'rectPanelCabeceraSesionConSusActividades')
       .attr('height', altoCabeceraSesion*2)  // Es un artificio para ocultar las esquinas inferiores redondeadas
@@ -432,7 +408,14 @@ export class HorarioG {
       .attr('dominant-baseline', 'central')
       .attr('text-anchor', 'middle');
 
+    this.renderizarBotonesPanelCabeceraSesionesActividades(panelSesionActividades);
+    this.renderizarPanelPieSesionActividades(panelSesionActividades)
+    this.renderizarPanelesCuerpoSesionActividades(panelSesionActividades);
+    this.anyadirPanelesActividades(actividadesSesion);
+
      return panelCabeceraSesionConActividades;
+
+
   }
 
   private renderizarPanelPieSesionActividades(panelSesionActividades: any) {
@@ -929,15 +912,12 @@ export class HorarioG {
   }
 
   private anyadirFuncionalidadDragAndDrop(elementoDom: any) {
-
-
     elementoDom.call(
       d3.drag()
         .on("start", this.dragstarted.bind(this))
         .on("drag", this.dragged.bind(this))
         .on("end", this.dragended.bind(this))
     );
-
 
   }
 
@@ -1124,11 +1104,5 @@ export class HorarioG {
       })[0]
 
   }
-
-
-
-
-
-
 
 }

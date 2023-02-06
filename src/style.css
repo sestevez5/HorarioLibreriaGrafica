@@ -16,11 +16,13 @@ div {
 }
 
 .seccion {
-  border-style: solid;
+
   border-color: grey;
   border-width: 0.5px;
   border-radius: 8px;
-  padding: 7px;
+  padding: 7px 0px;
+
+
 }
 
 .contenido {
@@ -45,7 +47,7 @@ div {
   grid-row: 2;
   grid-column: 1;
   display: grid;
-  grid-gap: 1rem;
+
   grid-template-columns: 1fr;
   grid-template-rows: 3fr 12fr;
   padding: 0px;
@@ -78,10 +80,9 @@ div {
   grid-row: 2;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 2fr 5fr;
   grid-template-rows: 1fr;
 
-  border-color: red;
 }
 
 /* Subsecciones de la sección Horario */
@@ -144,7 +145,7 @@ div {
 }
 
 .etiquetaCampoActividad {
-  width: 230px;
+  width: 360px;
 }
 
 [type="checkbox"]+span:not(.lever) {
