@@ -18,9 +18,9 @@ var configuracion = {
     mostrarPanelAcciones: true,
     tamanyoTexto: '13',
     contenidoSecciones: {
-        'seccion1': 'GRUPOS',
+        'seccion1': 'DOCENTES',
         'seccion2': 'DOCENTES',
-        'seccion3': 'CONTENIDO_LECTIVO'
+        'seccion3': 'DEPENDENCIAS'
 
     } // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
   },
@@ -250,7 +250,8 @@ var plantilla =  {
   }]
 }
 
- var plantilla = null;
+var plantillaAMostrar = plantilla;
+
 
 // 3.- colección de actividades que se renderizarán en el gráfico.
 // OBSERVACIONES: 
@@ -1121,6 +1122,56 @@ function establecerActividadActual(actividad) {
 
 }
 
+function establecerContenidoEnSeccion(numeroSeccion, valor) {
+
+    switch (valor) {
+        case '1':
+            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'GRUPOS'
+        break;
+
+        case '2':
+            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'DOCENTES'
+        break;
+
+        case '3':
+            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'DEPENDENCIAS'
+        break;
+
+        case '4':
+            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'CONTENIDO_LECTIVO'
+        break;
+    
+        default:
+            break;
+    }
+
+}
+
+function obtenerElementoSelector(entidadSeccion){
+
+    switch (entidadSeccion) {
+        case 'DEPENDENCIAS':
+            return 3
+        break;
+
+        case 'GRUPOS':
+            return 1
+        break;
+
+        case 'DOCENTES':
+            return 2
+        break;
+
+        case 'CONTENIDO_LECTIVO':
+            return 4
+        break;
+    
+        default:
+            break;
+    }
+
+}
+
 function iniciarParametros(){
 
     //----------------------------------------------------------
@@ -1134,7 +1185,7 @@ function iniciarParametros(){
 
         configuracion.actividades.mostrarPanelAcciones=event.target.checked;
 
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
     } );
 
 
@@ -1156,7 +1207,7 @@ function iniciarParametros(){
                 index > -1? configuracion.configuracionSemana.diasSemanaHabiles.splice(index,1):null
             }
             
-            graficoHorario.renderizarGrafico( configuracion, plantilla )
+            graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
          } );
 
        })
@@ -1174,7 +1225,7 @@ function iniciarParametros(){
     .addEventListener('input', (event) =>  {
         configuracion.actividades.tamanyoTexto=event.target.value;
         document.getElementById("valorTamanyoTexto").innerHTML=event.target.value;
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
      } );
 
     //----------------------------------------------------------
@@ -1190,10 +1241,10 @@ function iniciarParametros(){
     .addEventListener('input', (event) =>  {
         configuracion.panelSesiones.alto=event.target.value;
         document.getElementById("valorAltoSesiones").innerHTML=parseInt(parseFloat(event.target.value)*100)+'%';
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
      } );
 
-        //----------------------------------------------------------
+    //----------------------------------------------------------
     // Configuración parámetros: anchoSesiones 
     //----------------------------------------------------------
     if (configuracion.panelSesiones?.alto)
@@ -1206,35 +1257,74 @@ function iniciarParametros(){
     .addEventListener('input', (event) =>  {
         configuracion.panelSesiones.ancho=event.target.value;
         document.getElementById("valorAnchoSesiones").innerHTML=parseInt(parseFloat(event.target.value)*100)+'%';
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
      } );
-
-
-
-
-
-
 
     document.getElementById("horaInicio").value=configuracion.configuracionSemana?.horaMinima?configuracion.configuracionSemana.horaMinima:null;
     document.getElementById("horaInicio")
     .addEventListener('input', (event) =>  {
         configuracion.configuracionSemana.horaMinima=event.target.value;
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
      } );
 
     document.getElementById("horaFin").value=configuracion.configuracionSemana?.horaMaxima?configuracion.configuracionSemana.horaMaxima:null;
     document.getElementById("horaFin")
     .addEventListener('input', (event) =>  {
         configuracion.configuracionSemana.horaMaxima=event.target.value;
-        graficoHorario.renderizarGrafico( configuracion, plantilla )
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
      } );
 
      document.getElementById("colorSesiones").value=configuracion.panelSesiones?.colorCuerpo?configuracion.panelSesiones.colorCuerpo:null;
      document.getElementById("colorSesiones")
      .addEventListener('input', (event) =>  {
          configuracion.panelSesiones.colorCuerpo=event.target.value;
-         graficoHorario.renderizarGrafico( configuracion, plantilla )
+         graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
       } );
+
+    //----------------------------------------------------------
+    // Configuración parámetro: mostrarPlantilla
+    //----------------------------------------------------------
+    document.getElementById("mostrarPlantilla").checked=true;
+
+    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    document.getElementById("mostrarPlantilla")
+    .addEventListener('input', (event) =>  {
+
+        plantillaAMostrar=event.target.checked?plantillaAMostrar=plantilla:null;
+
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+
+
+    //----------------------------------------------------------
+    // Configuración parámetro: contenidos de las secciones de la actividad
+    //----------------------------------------------------------
+
+    //Seccion 1
+    document.getElementById("contenidoActividadSeccion1").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion1);
+    document.getElementById("contenidoActividadSeccion2").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion2);
+    document.getElementById("contenidoActividadSeccion3").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion3);
+
+    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    document.getElementById("contenidoActividadSeccion1")
+    .addEventListener('change', (event) =>  {
+        establecerContenidoEnSeccion(1,event.target.value);
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+
+    document.getElementById("contenidoActividadSeccion2")
+    .addEventListener('change', (event) =>  {
+        establecerContenidoEnSeccion(2,event.target.value);
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+
+    document.getElementById("contenidoActividadSeccion3")
+    .addEventListener('change', (event) =>  {
+        establecerContenidoEnSeccion(3,event.target.value);
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+
+
    
   
 
@@ -1250,7 +1340,7 @@ function init() {
   // IMPORTANTE: El renderizado depende de dos objetos que se pasarán por parámetro.
   // 1) Objeto de configuración: hora de inicio y fin y días habilitados
   // 2) Plantilla Horaria que se renderizará de fondo. 
-  graficoHorario.renderizarGrafico( configuracion, plantilla );
+  graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar );
 
   // Paso 3: Definir las actividades que se "pintarán"
   // Observaciones: Generalmente, la configuración y plantilla de fondo permanece estable y no se suele cambiar.
