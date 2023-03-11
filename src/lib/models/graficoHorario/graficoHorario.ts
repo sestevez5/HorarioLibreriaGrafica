@@ -40,17 +40,11 @@ export class HorarioG {
 
 
     if (this.svg) {
-
       d3.select('svg').remove();
     }
- 
-
-    
 
     this.svg = d3.select(this.elementoRaiz).append('svg');
-
     this.establecerParametrosConfiguracion(configuracionGrafico);
-
     this.configurarSvg(this.svg);
     this.renderizarPanelHorario(this.svg);
     this.renderizarPanelesDiasSamanas();
