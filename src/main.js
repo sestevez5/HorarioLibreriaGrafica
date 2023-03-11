@@ -250,6 +250,8 @@ var plantilla =  {
   }]
 }
 
+ var plantilla = null;
+
 // 3.- colección de actividades que se renderizarán en el gráfico.
 // OBSERVACIONES: 
 // a) Igual que en ekade, su renderizado es independiente del renderizado 
