@@ -54,7 +54,12 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     tamanyoTexto: '17',
     porcentajeZonaSeleccionActividad: 4,
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
-    mostrarPanelAcciones: false
+    mostrarPanelAcciones: false,
+    contenidoSecciones: {
+      seccion1: "GRUPOS",
+      seccion2: "DEPENDENCIAS",
+      seccion3: "DOCENTES"
+    }
   }
 
 }

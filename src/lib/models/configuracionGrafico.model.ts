@@ -1,3 +1,4 @@
+import { EnumEntidadesHorario } from './enumerados';
 import { ConfiguracionSemana } from './configuracionSemana.model';
 
 
@@ -51,7 +52,12 @@ export interface ConfiguracionGrafico {
     porcentajeZonaSeleccionActividad: number | undefined;
     colores: string[];
     mostrarPanelAcciones: boolean;
-    separacionActividades?: number | undefined
+    separacionActividades?: number | undefined;
+    contenidoSecciones?: {
+      seccion1: string,
+      seccion2: string,
+      seccion3: string
+    }
   }
 
 

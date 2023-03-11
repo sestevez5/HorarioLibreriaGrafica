@@ -1,6 +1,6 @@
-// import { HorarioG } from './lib/root'
+ import { HorarioG } from './lib/root'
 
-import { HorarioG} from '../dist/HorarioG.es'
+//import { HorarioG} from '../dist/HorarioG.es'
 
 //--------------------------------------------------------------
 // DATOS
@@ -16,7 +16,13 @@ var configuracion = {
 
   actividades: {
     mostrarPanelAcciones: true,
-    tamanyoTexto: '13'
+    tamanyoTexto: '13',
+    contenidoSecciones: {
+        'seccion1': 'GRUPOS',
+        'seccion2': 'DOCENTES',
+        'seccion3': 'CONTENIDO_LECTIVO'
+
+    } // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
   },
   panelSesiones: {
     alto:1,
@@ -903,6 +909,26 @@ var actividades = [
       ],
 
       grupos: [ 
+          {
+          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad811',
+          codigo: '3ESOB',
+          denominacionLarga: '3º ESO B'
+          },
+            {
+          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad812',
+          codigo: '3ESOA',
+          denominacionLarga: '3º ESO A'
+          },
+            {
+          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad813',
+          codigo: '3ESOC',
+          denominacionLarga: '3º ESO C'
+          },
+            {
+          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad814',
+          codigo: '3ESOD',
+          denominacionLarga: '3º ESO D'
+          }
         
       ],
 

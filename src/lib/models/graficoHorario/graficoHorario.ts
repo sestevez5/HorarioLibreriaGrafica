@@ -112,6 +112,13 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.alto?CONFIGURACION_GRAFICO.panelSesiones.alto = configuracionGrafico.panelSesiones.alto:null;
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
 
+    if(configuracionGrafico.actividades.contenidoSecciones) {
+      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion1 = configuracionGrafico.actividades.contenidoSecciones?.seccion1;
+      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion2 = configuracionGrafico.actividades.contenidoSecciones?.seccion2;
+      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion3 = configuracionGrafico.actividades.contenidoSecciones?.seccion3;
+    }
+
+
     // Cálculo del rango en horas del horario
     const fechaFin: Date = Utilidades.convertirCadenaHoraEnTiempo(CONFIGURACION_GRAFICO.configuracionSemana.horaMaxima);
     const fechaInicio: Date = Utilidades.convertirCadenaHoraEnTiempo(CONFIGURACION_GRAFICO.configuracionSemana.horaMinima);
@@ -584,12 +591,21 @@ export class HorarioG {
         .attr('width', anchoSesion);
 
         // A cada panel de una actividad además le añadimos las tres secciones
+        const entidadSeccio1 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion1;
+        const entidadSeccio2 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion2;
+        const entidadSeccio3 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion3;
+
+
         as.actividades.forEach(
           actividad => {
             const panelActividad = d3.select('g#panelActividad_' + actividad.idActividad);
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 1, actividad.grupos?.map(grupo => grupo.codigo));
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 2, actividad.docentes?.map(docente => docente.alias));
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 3, actividad.dependencia ? [actividad.dependencia.codigo] : []);
+            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 1, actividad.grupos?.map(grupo => grupo.codigo));
+            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 2, actividad.docentes?.map(docente => docente.alias));
+            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 3, actividad.dependencia ? [actividad.dependencia.codigo] : []);
+
+            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 1, this.obtenerCadenasEntidadesHorario(actividad, entidadSeccio1));
+            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 2, this.obtenerCadenasEntidadesHorario(actividad, entidadSeccio2));
+            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 3, this.obtenerCadenasEntidadesHorario(actividad,entidadSeccio3));
             CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones? this.renderizarSeccionBotonesAccionPanelActividad(panelActividad, actividad): null;
 
           }
@@ -1105,4 +1121,36 @@ export class HorarioG {
 
   }
 
+  private obtenerCadenasEntidadesHorario( actividad: ActividadG, tipoEntidad: string ):string[] {
+
+    
+    switch (tipoEntidad) {
+
+      case "GRUPOS":
+        console.log('ads')
+        return actividad.grupos?.map(grupo => grupo.codigo)
+      break;
+
+      case "DEPENDENCIAS":
+        return actividad.dependencia ? [actividad.dependencia.codigo] : []
+      break;
+
+      case "CONTENIDO_LECTIVO":
+        return actividad.asignaturas?.map(contenidoLectivo => contenidoLectivo.codigo)
+      break;
+
+      case "DOCENTES":
+        return actividad.docentes?.map(docente => docente.alias)
+      break;
+    
+      default:
+        return []
+      break;
+    }
+
+
+    
+  }
+
 }
+
