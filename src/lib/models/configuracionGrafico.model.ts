@@ -1,4 +1,3 @@
-import { EnumEntidadesHorario } from './enumerados';
 import { ConfiguracionSemana } from './configuracionSemana.model';
 
 
