@@ -1,6 +1,11 @@
- import { HorarioG } from './lib/root'
+// ejecucion durante el desarrollo
+//import { HorarioG } from './lib/root'
 
-//import { HorarioG} from '../dist/HorarioG.es'
+// Ejecución para prueba externa con vite
+// import { HorarioG } from '../dist/HorarioG.es'
+
+// Ejecución con live-server
+import { HorarioG } from '../dist/HorarioG.es.js'
 
 //--------------------------------------------------------------
 // DATOS
@@ -12,6 +17,7 @@ var configuracion = {
     horaMinima: '08:00',
     horaMaxima: '14:00',
     diasSemanaHabiles: ['L','M','X','J','V'],
+
   },
 
   actividades: {
@@ -19,7 +25,7 @@ var configuracion = {
     tamanyoTexto: '13',
     contenidoSecciones: {
         'seccion1': 'DOCENTES',
-        'seccion2': 'DOCENTES',
+        'seccion2': 'GRUPOS',
         'seccion3': 'DEPENDENCIAS'
 
     } // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
@@ -544,6 +550,469 @@ var actividades = [
   },
 
   {
+    idActividad: '646c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '08:00',
+        horaFin: '08:55',
+        idSesion: 'P1X1'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'Martín',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'emarsan'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '1BACA',
+            denominacionLarga: '1º Bachillerato A'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: '3.1',
+        denominacionLarga: 'Aula 3.1'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+{
+    idActividad: '656c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '08:00',
+        horaFin: '08:55',
+        idSesion: 'P1X1'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'Martín',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'emarsan'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '1BACA',
+            denominacionLarga: '1º Bachillerato A'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: '3.1',
+        denominacionLarga: 'Aula 3.1'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+{
+    idActividad: '676c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '08:00',
+        horaFin: '08:55',
+        idSesion: 'P1X1'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'Martín',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'emarsan'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '1BACA',
+            denominacionLarga: '1º Bachillerato A'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: '3.1',
+        denominacionLarga: 'Aula 3.1'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+{
+    idActividad: '246c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '09:50',
+        horaFin: '10:45',
+        idSesion: 'P1X3'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'Martín',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'emarsan'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '1BACA',
+            denominacionLarga: '1º Bachillerato A'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: '3.1',
+        denominacionLarga: 'Aula 3.1'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+{
+    idActividad: '346c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '08:00',
+        horaFin: '08:55',
+        idSesion: 'P1X1'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'Martín',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'emarsan'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '3ESOA',
+            denominacionLarga: '3º ESO'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: 'GYM',
+        denominacionLarga: 'gimnasio'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+{
+    idActividad: '946c632e-93d9-496b-b29c-0c39e2d8c6a1',
+
+    sesion: {
+        diaSemana: 'X',
+        horaInicio: '08:55',
+        horaFin: '09:50',
+        idSesion: 'P1X2'
+    },
+
+    periodoVigencia: {
+        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+        denominacion: 'Curso completo',
+        fechaInicio: '20210901',
+        fechaFin: '20220630'
+    },
+
+    tipoActividad: {
+        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+        codigo: 'CCM',
+        denominacionLarga: 'Clase colectiva de una materia',
+        obligaDocentes: false,
+        permiteDocentes: true,
+        obligaAsignaturas: false,
+        permiteAsignaturas: true,
+        obligaGrupos: false,
+        permiteGrupos: true,
+        obligaDetalle: false,
+        permiteDetalle: true,
+        esLectiva: true,
+        tipoPredeterminado: true
+
+    },
+
+    docentes: [
+     
+        {
+            idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
+            nombre: 'Edita',
+            apellido1: 'López',
+            apellido2: 'Sanabria',
+            foto: '',
+            alias: 'jlopbonu'
+        },
+       
+
+
+    ],
+
+    asignaturas: [
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'LCL',
+            denominacionLarga: 'Lengua'
+        }
+
+    ],
+
+    grupos: [ 
+        {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '1BACA',
+            denominacionLarga: '1º Bachillerato A'
+        }
+
+
+    ],
+
+    dependencia: {
+        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+        codigo: '3.7',
+        denominacionLarga: 'Aula 3.7'
+    },
+
+    detalleActividad: "Se imparte en el Gimnasio"
+
+},
+
+  {
       idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a6',
 
       sesion: {
@@ -671,7 +1140,7 @@ var actividades = [
   },
 
   {
-    idActividad: '75fc3ad1-da1a-4860-ae35-d8a675fa06a6',
+    idActividad: '77fc3ad1-da1a-4860-ae35-d8a675fa06a6',
 
     sesion: {
         diaSemana: 'L',
@@ -870,7 +1339,7 @@ var actividades = [
   },
    
   {
-      idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a1',
+      idActividad: '76fc3ad4-da1a-4860-ae35-d8a675fa06a1',
 
       sesion: {
           diaSemana: 'M',
@@ -946,7 +1415,7 @@ var actividades = [
   },
 
   {
-      idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a7',
+      idActividad: '77fc3ad4-da1a-4860-ae35-d8a675fa06a7',
 
       sesion: {
           diaSemana: 'M',
@@ -1011,7 +1480,7 @@ var actividades = [
 
   
   {
-      idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a9',
+      idActividad: '78fc3ad4-da1a-4860-ae35-d8a675fa06a9',
 
       sesion: {
           diaSemana: 'L',
