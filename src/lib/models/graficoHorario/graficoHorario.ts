@@ -1111,7 +1111,7 @@ export class HorarioG {
 
     d.accion = undefined;
 
-
+//d
 
   }
 
