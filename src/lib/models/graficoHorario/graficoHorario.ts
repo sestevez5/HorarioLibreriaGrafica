@@ -354,7 +354,6 @@ export class HorarioG {
 
   } 
 
-
   private renderizarActividadesPorDiaSemana(panelDiaSemana: string, actividadesG: ActividadG[]) {
 
     // Paso 0: Transformamos la colección de actividades agrupándolas por sesiones.
@@ -385,18 +384,18 @@ export class HorarioG {
 
     //---------------------------------------------------------------------------------
     // Paso1: Añadimos el panel cabecera para la sesión que representa con sus actividades.
-    // Su identificador será el texto 'panelCabeceraSesionConSusActividades' con el id de la
+    // Su identificador será el texto 'panelCabeceraSesionActividades' con el id de la
     // sesión.
     //---------------------------------------------------------------------------------
     const panelCabeceraSesionConActividades = panelSesionActividades.append('g')
-      .attr('class', 'panelCabeceraSesionConSusActividades')
-      .attr('id', (d: IActividadesSesion) => 'panelCabeceraSesionConSusActividades' + d.sesion.idSesion);
+      .attr('class', 'panelCabeceraSesionActividades')
+      .attr('id', (d: IActividadesSesion) => 'panelCabeceraSesionActividades' + d.sesion.idSesion);
 
     //---------------------------------------------------------------------------------
     // Definicion del rectángulo que representa a la cabecera de la sesión.
     //---------------------------------------------------------------------------------
     panelCabeceraSesionConActividades.append('rect')
-      .attr('class', 'rectPanelCabeceraSesionConSusActividades')
+      .attr('class', 'rectPanelCabeceraSesionActividades')
       .attr('height', altoCabeceraSesion*2)  // Es un artificio para ocultar las esquinas inferiores redondeadas
       .attr('width', anchoSesion)
       .attr('rx',10)
@@ -412,9 +411,10 @@ export class HorarioG {
       .attr('dominant-baseline', 'central')
       .attr('text-anchor', 'middle');
 
-    this.renderizarBotonesPanelCabeceraSesionesActividades(panelSesionActividades);
-    this.renderizarPanelPieSesionActividades(panelSesionActividades)
+    this.renderizarBotonesPanelCabeceraSesionesActividades(panelCabeceraSesionConActividades);
     this.renderizarPanelesCuerpoSesionActividades(panelSesionActividades);
+    this.renderizarPanelPieSesionActividades(panelSesionActividades)
+ 
     this.anyadirPanelesActividades(actividadesSesion);
 
      return panelCabeceraSesionConActividades;
@@ -431,12 +431,12 @@ export class HorarioG {
 
     //---------------------------------------------------------------------------------
     // Paso1: Añadimos el panel cabecera para la sesión que representa con sus actividades.
-    // Su identificador será el texto 'panelCabeceraSesionConSusActividades' con el id de la
+    // Su identificador será el texto 'panelPieSesionActividades' con el id de la
     // sesión.
     //---------------------------------------------------------------------------------
     const panelPieSesionConActividades = panelSesionActividades.append('g')
-      .attr('class', 'panelPieSesionConSusActividades')
-      .attr('id', (d: IActividadesSesion) => 'panelPieSesionConSusActividades' + d.sesion.idSesion);
+      .attr('class', 'panelPieSesionActividades')
+      .attr('id', (d: IActividadesSesion) => 'panelPieSesionActividades' + d.sesion.idSesion);
 
 
 
@@ -444,7 +444,7 @@ export class HorarioG {
     // Definicion del rectángulo que representa a la cabecera de la sesión.
     //---------------------------------------------------------------------------------
     panelPieSesionConActividades.append('rect')
-      .attr('class', 'rectPanelCabeceraSesionConSusActividades')
+      .attr('class', 'rectPanelPieSesionActividades')
       .attr('height', altoPie)  // Es un artificio para ocultar las esquinas inferiores redondeadas
       .attr('width', anchoSesion)
       // .attr('rx',10)
@@ -526,7 +526,7 @@ export class HorarioG {
 
     //---------------------------------------------------------------------------------
     // Paso1: Añadimos el panel cabecera para la sesión que representa con sus actividades.
-    // Su identificador será el texto 'panelCabeceraSesionConSusActividades' con el id de la
+    // Su identificador será el texto 'panelCuerpoSesionActividades' con el id de la
     // sesión.
     //---------------------------------------------------------------------------------
     const panelCuerpoSesionConActividades = panelSesionActividades.append('g')
@@ -559,11 +559,21 @@ export class HorarioG {
   private anyadirPanelesActividades(actividadesSesiones: IActividadesSesion[]) {
 
     const anchoSesion = CONFIGURACION_GRAFICO.panelSesiones.anchoSesion ? CONFIGURACION_GRAFICO.panelSesiones.anchoSesion.toString() : '0';
+    const mostrarSessionPie = CONFIGURACION_GRAFICO.actividades.mostrarSeccionPie? CONFIGURACION_GRAFICO.actividades.mostrarSeccionPie : false;
+    const altoSeccionPie = CONFIGURACION_GRAFICO.actividades.altoSeccionPie? CONFIGURACION_GRAFICO.actividades.altoSeccionPie : 0;
+
 
     actividadesSesiones.forEach(as => {
 
-      // Precalculamos el alto de los paneles
-      const altoPanelActividadesEnActividadSesiones = Utilidades.altoPanel(as.sesion) - CONFIGURACION_GRAFICO.panelSesiones.altoCabecera - CONFIGURACION_GRAFICO.panelSesiones.altoPie;
+      // alto del panel que representa a una actividad. (vertical) 
+      const altoPanelActividad = Utilidades.altoPanel(as.sesion) - CONFIGURACION_GRAFICO.panelSesiones.altoCabecera - CONFIGURACION_GRAFICO.panelSesiones.altoPie;
+      
+      // Dimensiones paneles secciones (vertical) 
+      const altoPanelesSecciones = mostrarSessionPie?altoPanelActividad-altoSeccionPie :0;
+
+      // Dimensiones panel: Zonal selección
+      const anchoZonaSeleccion = parseFloat(anchoSesion) * CONFIGURACION_GRAFICO.actividades.porcentajeZonaSeleccionActividad / 100;
+      const altoZonaSeleccion = altoPanelActividad;  // No lo cambiamos
 
       // Localizamos el panel relativo al cuerpo de la actividadesSesion
       // y le añadimos los paneles que representarán a cada una de sus actividades.
@@ -580,7 +590,7 @@ export class HorarioG {
         .attr('transform', (d: any, i: any, n: any) => `translate(${(i) * parseFloat(anchoSesion)},0)`)
         .attr('x', (d: any, i: any, n: any) => (i) * parseFloat(anchoSesion))
         .attr('y', 0)
-        .attr('height', altoPanelActividadesEnActividadSesiones)
+        .attr('height', altoPanelesSecciones)
         .attr('width', anchoSesion);
 
         // A cada panel de una actividad además le añadimos las tres secciones
@@ -606,7 +616,7 @@ export class HorarioG {
 
             // Paso 3: en el caso de que se quiera añadir una botonera se ejecutaría el método "renderizarSeccionBotonesAccionPanelActividad"
             //CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones? this.renderizarSeccionBotonesAccionPanelActividad(panelActividad, actividad): null;
-            this.renderizarSeccionPieActividad(panelActividad, actividad)
+            mostrarSessionPie && altoSeccionPie !== 0?this.renderizarSeccionPieActividad(panelActividad, actividad):null;
 
 
           }
@@ -616,16 +626,11 @@ export class HorarioG {
       // -------------------------------------------------------------------
       // Añadimos el rectángulo
       // -------------------------------------------------------------------
-      const porcentajeAnchoZonaSeleccion = CONFIGURACION_GRAFICO.actividades.porcentajeZonaSeleccionActividad;
-
-      const anchoZonaSeleccion = parseFloat(anchoSesion) * CONFIGURACION_GRAFICO.actividades.porcentajeZonaSeleccionActividad / 100;
-
-
       const rectZonaSeleccion = panelesActividades.select('.panelActividadZonaSeleccion').append('rect')
           .attr('class', 'rectActividad')
           .attr('width', anchoZonaSeleccion)
-          .attr('height', altoPanelActividadesEnActividadSesiones)
-          .attr('fill', '#fafafa')
+          .attr('height', altoZonaSeleccion)
+          .attr('fill', '#eee')
           .on("click", (d: any, i: any, e: any) => {
 
             const marcadaActividadActualComoSeleccionada = d3.select('g#panelActividad_' + i.idActividad).attr('class').split(' ').includes('actividadSeleccionada');
@@ -645,22 +650,22 @@ export class HorarioG {
 
       const botonesMoverDuplicar = panelesActividades.select('.panelActividadZonaSeleccion').append('svg:foreignObject')
         .attr("width", anchoZonaSeleccion + 'px')
-        .attr("height", altoPanelActividadesEnActividadSesiones/2 + 'px')
+        .attr("height", altoZonaSeleccion/2 + 'px')
         .attr("y",'3px')
         .append("xhtml:div")
         .style("width", anchoZonaSeleccion + 'px')
-        .style("height", (altoPanelActividadesEnActividadSesiones/2)-3 + 'px')
+        .style("height", (altoZonaSeleccion/2)-3 + 'px')
         .style('text-align','center')
         .html(`<i class="fas fa fa-expand-arrows-alt" style="font-size:8px; "/><p style="font-size:4px"></p><i class="fas fa fa-copy" style="font-size:8px;"/i>`);
 
       const panelBotonesAnyadirEliminar = panelesActividades.select('.panelActividadZonaSeleccion').append('svg:foreignObject')
   
         .attr("width", anchoZonaSeleccion + 'px')
-        .attr("height", altoPanelActividadesEnActividadSesiones/2 + 'px')
-        .attr("y",altoPanelActividadesEnActividadSesiones/2+'px')
+        .attr("height", altoZonaSeleccion/2 + 'px')
+        .attr("y",altoZonaSeleccion/2+'px')
         .append("xhtml:div")
           .style("width", anchoZonaSeleccion + 'px')
-          .style("height", altoPanelActividadesEnActividadSesiones/2 + 'px')
+          .style("height", altoZonaSeleccion/2 + 'px')
           .style("display", 'flex')
           .style("align-items","end")
           .style('justify-content', 'center')
@@ -686,7 +691,6 @@ export class HorarioG {
 
   }
 
-
   private renderizarSeccionBotonesAccionPanelActividad(panelActividad: any, actividad: ActividadG) {
 
     const panelActividadBBox =
@@ -709,18 +713,31 @@ export class HorarioG {
 
   private renderizarSeccionPieActividad(panelActividad: any, actividad: ActividadG) {
 
+    const anchoSesion = CONFIGURACION_GRAFICO.panelSesiones.anchoSesion ? CONFIGURACION_GRAFICO.panelSesiones.anchoSesion.toString() : '0';
+    const anchoZonaSeleccion = parseFloat(anchoSesion) * CONFIGURACION_GRAFICO.actividades.porcentajeZonaSeleccionActividad / 100;
+    const altoSeccionPie = CONFIGURACION_GRAFICO.actividades.altoSeccionPie? CONFIGURACION_GRAFICO.actividades.altoSeccionPie : 0;
+   
+
+ 
+
     const panelActividadBBox =
     {
-      'x': panelActividad.attr('x'),
-      'y': panelActividad.attr('y'),
-      'height': panelActividad.attr('height'),
-      'width': panelActividad.attr('width')
+      'x': anchoZonaSeleccion,
+      'y': panelActividad.attr('height'),
+      'height': altoSeccionPie,
+      'width': panelActividad.attr('width')-anchoZonaSeleccion
     }
     const panelZonaPieActividad = panelActividad.append('g')
-      .attr('class', 'panelActividadZonaPie')
-      .attr('id', 'panelActividadZonaPie_' + actividad.idActividad);
+      .attr('class', 'panelActividadSeccionPie')
+      .attr('id', 'panelActividadSeccionPie_' + actividad.idActividad)
+      .attr('transform', `translate(${(panelActividadBBox.x)},${(panelActividadBBox.y)})`)
+      .attr('height', panelActividadBBox.height)
+      .attr('width', panelActividadBBox.width)
 
-
+      const rectPanelSeccion = panelZonaPieActividad.append('rect')
+      .attr('height', panelActividadBBox.height)
+      .attr('width', panelActividadBBox.width)
+      .attr('fill', actividad.color);
 
     // const porcentajeAnchoZonaPie = CONFIGURACION_GRAFICO.actividades.porcentajeZonaPieActividad;
     const porcentajeAnchoZonaPie = 10;

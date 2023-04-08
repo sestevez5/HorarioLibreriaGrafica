@@ -56,7 +56,8 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
     mostrarPanelAcciones: false,
     contenidoSecciones: ["GRUPOS","DEPENDENCIAS","DOCENTES"],
-    añadirSeccionPie: false
+    mostrarSeccionPie: true,
+    altoSeccionPie: 10
     }
   }
 

@@ -49,11 +49,13 @@ export interface ConfiguracionGrafico {
   actividades?: {
     tamanyoTexto: string;
     porcentajeZonaSeleccionActividad: number | undefined;
+    altoSeccionPie: number | undefined;
     colores: string[];
     mostrarPanelAcciones: boolean;
     separacionActividades?: number | undefined;
     contenidoSecciones?: Array<string>
-    añadirSeccionPie: boolean 
+    mostrarSeccionPie: boolean 
+
   }
 
 
