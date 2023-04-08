@@ -39,7 +39,7 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     margenLateral: 0,
     altoCabecera: 11,
     anchoSesion: undefined,
-    altoPie: 5,
+    altoPie: 0,
     colorCabecera:'#fff',
     colorCuerpo:'#f4f4f4'
 
@@ -55,14 +55,12 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     porcentajeZonaSeleccionActividad: 4,
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
     mostrarPanelAcciones: false,
-    contenidoSecciones: {
-      seccion1: "GRUPOS",
-      seccion2: "DEPENDENCIAS",
-      seccion3: "DOCENTES"
+    contenidoSecciones: ["GRUPOS","DEPENDENCIAS","DOCENTES"],
+    añadirSeccionPie: false
     }
   }
 
-}
+
 
 export const DIAS_SEMANA: DiaSemana[] = [
   { codigo: 'L', denominacionCorta: 'LUN', denominacionLarga: 'Lunes' },

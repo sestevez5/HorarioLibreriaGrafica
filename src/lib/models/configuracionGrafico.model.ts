@@ -52,11 +52,8 @@ export interface ConfiguracionGrafico {
     colores: string[];
     mostrarPanelAcciones: boolean;
     separacionActividades?: number | undefined;
-    contenidoSecciones?: {
-      seccion1: string,
-      seccion2: string,
-      seccion3: string
-    }
+    contenidoSecciones?: Array<string>
+    añadirSeccionPie: boolean 
   }
 
 

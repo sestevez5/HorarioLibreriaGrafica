@@ -78,7 +78,7 @@
                   <div class="valorSlider" id="valorAnchoSesiones"></div>
                 </div>
               </div>
-
+<!-- 
               <div class="opcion opcionConfiguracionSecciones" >
                 <div class="Seccion1">
                   <label>Contenido sección 1:</label>
@@ -110,8 +110,23 @@
                     <option value="4" >Contenido lectivo</option>
                   </select>
                 </div>
+
+           
             
+              </div> -->
+
+              <div style="display: flex;">
+              <div class="input-field" style="flex-grow: 1">
+                <input placeholder="DOC, DEP, CON" id="configuracionSecciones" type="text" class="validate">
+                <label for="configuracionSecciones" >Configuración secciones</label>
               </div>
+              <div  style="margin-left: 10px; display: flex; align-items: center;"><a id="botonAplicarConfiguracionSecciones" class="waves-effect waves-light btn">Aplicar</a></div>
+              
+            </div>
+    
+              <blockquote style="text-align: justify;">
+                Las configuraciones de secciones se establecen a partir de los literales DOC (docentes), DEP (dependencias) , CON (contenido lectivo) y  GRU (grupos) separándolos por comas. Por ejemplo, añadiendo el contenido "DOC, GRU, DEP" se mostrará en la primera seccion "docentes", en la segunda "grupos" y en la tercera "dependencias". El número máximo de cadenas posibles es tres
+              </blockquote>
 
               
 

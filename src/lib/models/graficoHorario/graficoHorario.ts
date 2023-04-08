@@ -19,6 +19,7 @@ export class HorarioG {
   elementoRaiz: any;
   plantilla: Plantilla;
   actividadesG: ActividadG[] = [];
+  numeroSesionesPorActividad: number;
   
 
   // Observables.
@@ -107,9 +108,11 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
 
     if(configuracionGrafico.actividades.contenidoSecciones) {
-      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion1 = configuracionGrafico.actividades.contenidoSecciones?.seccion1;
-      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion2 = configuracionGrafico.actividades.contenidoSecciones?.seccion2;
-      CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion3 = configuracionGrafico.actividades.contenidoSecciones?.seccion3;
+      CONFIGURACION_GRAFICO.actividades.contenidoSecciones=[];
+      configuracionGrafico.actividades?.contenidoSecciones.forEach(
+        contenidoSeccion => CONFIGURACION_GRAFICO.actividades.contenidoSecciones.push(contenidoSeccion)
+      )
+
     }
 
 
@@ -329,7 +332,7 @@ export class HorarioG {
       .attr('text-anchor', 'middle')
 
     const panelCuerpoSesion = panelSesion.append('g')
-      .attr('class', 'panelCabeceraSesion')
+      .attr('class', 'panelCuerpoSesion')
       .attr('transform', d => `translate(0,${CONFIGURACION_GRAFICO.panelSesiones.altoCabecera})`);
 
     // Definición del fondo.
@@ -440,20 +443,16 @@ export class HorarioG {
     //---------------------------------------------------------------------------------
     // Definicion del rectángulo que representa a la cabecera de la sesión.
     //---------------------------------------------------------------------------------
-
-
-
     panelPieSesionConActividades.append('rect')
       .attr('class', 'rectPanelCabeceraSesionConSusActividades')
-      .attr('height', altoPie*2)  // Es un artificio para ocultar las esquinas inferiores redondeadas
+      .attr('height', altoPie)  // Es un artificio para ocultar las esquinas inferiores redondeadas
       .attr('width', anchoSesion)
-      .attr('rx',10)
+      // .attr('rx',10)
       .attr('y', (d: any) => {
         const coordenadaHoraInicio = CONFIGURACION_GRAFICO.escalas.escalaVertical(Utilidades.convertirCadenaHoraEnTiempo(d.sesion.horaInicio));
-
-        
+      
         const coordenadaHoraFin = CONFIGURACION_GRAFICO.escalas.escalaVertical(Utilidades.convertirCadenaHoraEnTiempo(d.sesion.horaFin));
-        return coordenadaHoraFin - coordenadaHoraInicio - altoPie*2;
+        return coordenadaHoraFin - coordenadaHoraInicio - altoPie;
       })
       .attr('fill', '#ccc');
 
@@ -585,22 +584,30 @@ export class HorarioG {
         .attr('width', anchoSesion);
 
         // A cada panel de una actividad además le añadimos las tres secciones
-        const entidadSeccio1 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion1;
-        const entidadSeccio2 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion2;
-        const entidadSeccio3 = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.seccion3;
+        const entidadesSecciones = []
+        CONFIGURACION_GRAFICO.actividades.contenidoSecciones.forEach(
+          entidad=> entidadesSecciones.push(entidad)
+        )
 
+ 
 
         as.actividades.forEach(
           actividad => {
-            const panelActividad = d3.select('g#panelActividad_' + actividad.idActividad);
-            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 1, actividad.grupos?.map(grupo => grupo.codigo));
-            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 2, actividad.docentes?.map(docente => docente.alias));
-            // this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 3, actividad.dependencia ? [actividad.dependencia.codigo] : []);
 
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 1, this.obtenerCadenasEntidadesHorario(actividad, entidadSeccio1));
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 2, this.obtenerCadenasEntidadesHorario(actividad, entidadSeccio2));
-            this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, 3, this.obtenerCadenasEntidadesHorario(actividad,entidadSeccio3));
+            // Paso 1: Renderizamos cada una de las secciones verticales: pueden haber múltipler
+            const panelActividad = d3.select('g#panelActividad_' + actividad.idActividad);
+            for (let index = 1; index < entidadesSecciones.length+1; index++) {
+              this.renderizarSeccionContenidoPanelActividad(panelActividad, actividad, index, this.obtenerCadenasEntidadesHorario(actividad, entidadesSecciones[index-1]));
+              
+            }
+
+            // Paso 2: en el caso de que se quiera añadir una botonera se ejecutaría el método "renderizarSeccionBotonesAccionPanelActividad"
             CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones? this.renderizarSeccionBotonesAccionPanelActividad(panelActividad, actividad): null;
+
+            // Paso 3: en el caso de que se quiera añadir una botonera se ejecutaría el método "renderizarSeccionBotonesAccionPanelActividad"
+            //CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones? this.renderizarSeccionBotonesAccionPanelActividad(panelActividad, actividad): null;
+            this.renderizarSeccionPieActividad(panelActividad, actividad)
+
 
           }
         )
@@ -679,6 +686,7 @@ export class HorarioG {
 
   }
 
+
   private renderizarSeccionBotonesAccionPanelActividad(panelActividad: any, actividad: ActividadG) {
 
     const panelActividadBBox =
@@ -699,8 +707,32 @@ export class HorarioG {
 
   }
 
+  private renderizarSeccionPieActividad(panelActividad: any, actividad: ActividadG) {
+
+    const panelActividadBBox =
+    {
+      'x': panelActividad.attr('x'),
+      'y': panelActividad.attr('y'),
+      'height': panelActividad.attr('height'),
+      'width': panelActividad.attr('width')
+    }
+    const panelZonaPieActividad = panelActividad.append('g')
+      .attr('class', 'panelActividadZonaPie')
+      .attr('id', 'panelActividadZonaPie_' + actividad.idActividad);
+
+
+
+    // const porcentajeAnchoZonaPie = CONFIGURACION_GRAFICO.actividades.porcentajeZonaPieActividad;
+    const porcentajeAnchoZonaPie = 10;
+
+
+
+  }
+
+
   private renderizarSeccionContenidoPanelActividad(panelActividad: any, actividad: ActividadG, numeroSeccion: number, listaCadenas: string[]) {
    
+    const numeroSecciones = CONFIGURACION_GRAFICO.actividades.contenidoSecciones.length;
     const panelActividadBBox =
     {
       'x': panelActividad.attr('x'),
@@ -715,10 +747,10 @@ export class HorarioG {
     const anchoZonaSeleccion = CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones? panelActividadBBox.width*(porcentajeAnchoZonaSeleccion/100): 0;
     const panelSeccionBBox =
     {
-      'x': (numeroSeccion-1) * (panelActividadBBox.width*(1-porcentajeAnchoZonaSeleccion/100) / 3)+panelActividadBBox.width*(porcentajeAnchoZonaSeleccion/100),
+      'x': (numeroSeccion-1) * (panelActividadBBox.width*(1-porcentajeAnchoZonaSeleccion/100) / numeroSecciones)+panelActividadBBox.width*(porcentajeAnchoZonaSeleccion/100),
       'y': panelActividadBBox.y,
       'height': panelActividadBBox.height,
-      'width': panelActividadBBox.width * (1-porcentajeAnchoZonaSeleccion/100) / 3
+      'width': panelActividadBBox.width * (1-porcentajeAnchoZonaSeleccion/100) / numeroSecciones
     }
 
 
@@ -834,7 +866,7 @@ export class HorarioG {
 
     // 3,. Establecemos parámetros.
     const anchoScroll = 5;
-    const altoScroll = dps.height * dps.height / dpcs.height;
+    const altoScroll = dps.height * dps.height / (dpcs.height);
     const maxDesplazamientoScroll = dps.height - altoScroll;
     const longitudSeccionExterna = dpcs.height - dps.height;
 
@@ -1120,20 +1152,19 @@ export class HorarioG {
     
     switch (tipoEntidad) {
 
-      case "GRUPOS":
-        console.log('ads')
+      case "GRU":
         return actividad.grupos?.map(grupo => grupo.codigo)
       break;
 
-      case "DEPENDENCIAS":
+      case "DEP":
         return actividad.dependencia ? [actividad.dependencia.codigo] : []
       break;
 
-      case "CONTENIDO_LECTIVO":
+      case "CON":
         return actividad.asignaturas?.map(contenidoLectivo => contenidoLectivo.codigo)
       break;
 
-      case "DOCENTES":
+      case "DOC":
         return actividad.docentes?.map(docente => docente.alias)
       break;
     

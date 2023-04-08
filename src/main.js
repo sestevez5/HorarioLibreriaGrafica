@@ -1,11 +1,12 @@
 // ejecucion durante el desarrollo
-//import { HorarioG } from './lib/root'
+import { forEachChild } from 'typescript';
+import { HorarioG } from './lib/root'
 
 // Ejecución para prueba externa con vite
 // import { HorarioG } from '../dist/HorarioG.es'
 
 // Ejecución con live-server
-import { HorarioG } from '../dist/HorarioG.es.js'
+//import { HorarioG } from '../dist/HorarioG.es.js'
 
 //--------------------------------------------------------------
 // DATOS
@@ -23,12 +24,7 @@ var configuracion = {
   actividades: {
     mostrarPanelAcciones: true,
     tamanyoTexto: '13',
-    contenidoSecciones: {
-        'seccion1': 'DOCENTES',
-        'seccion2': 'GRUPOS',
-        'seccion3': 'DEPENDENCIAS'
-
-    } // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
+    contenidoSecciones: ["GRU","DOC"], // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
   },
   panelSesiones: {
     alto:1,
@@ -1461,13 +1457,20 @@ var actividades = [
       ],
 
       asignaturas: [
-         
-      ],
+        {
+            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+            codigo: 'FYQ',
+            denominacionLarga: 'Física y Química'
+        }
+    ],
 
-      grupos: [ 
-        
-      ],
-
+    grupos: [ 
+        {
+        idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+        codigo: '3ESOB',
+        denominacionLarga: '3º ESO A'
+        }
+    ],
       dependencia: {
           idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
           codigo: '3.1',
@@ -1641,6 +1644,45 @@ function obtenerElementoSelector(entidadSeccion){
 
 }
 
+function cadenasSeccionesToArray( cadenaSecciones) {
+    const cadenasPosibles=['DOC','GRU','DEP','CON'];
+    let cadenas = [];
+    let secciones = cadenaSecciones.split(',');
+
+
+    for (let index = 0; index < secciones.length; index++) {
+      
+
+        const v = secciones[index].trim();
+
+        if (cadenasPosibles.includes(v)){
+            
+            cadenas.push(v)
+        }
+        else{
+            console.log('cadenas break',cadenas)
+           break;
+        }
+        
+        
+    }
+
+    console.log('cadenas fuera break',cadenas)
+
+    return cadenas;
+
+  
+    
+
+}
+
+function seccionerToCadena( secciones ) {
+    let cadena = "";
+    secciones.forEach(seccion => cadena += seccion+',');
+    cadena = cadena.substring(0, cadena.length-1);
+    return cadena;
+}
+
 function iniciarParametros(){
 
     //----------------------------------------------------------
@@ -1769,27 +1811,39 @@ function iniciarParametros(){
     // Configuración parámetro: contenidos de las secciones de la actividad
     //----------------------------------------------------------
 
+    // //Seccion 1
+    // document.getElementById("contenidoActividadSeccion1").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion1);
+    // document.getElementById("contenidoActividadSeccion2").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion2);
+    // document.getElementById("contenidoActividadSeccion3").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion3);
+
+    // // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    // document.getElementById("contenidoActividadSeccion1")
+    // .addEventListener('change', (event) =>  {
+    //     establecerContenidoEnSeccion(1,event.target.value);
+    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    // } );
+
+    // document.getElementById("contenidoActividadSeccion2")
+    // .addEventListener('change', (event) =>  {
+    //     establecerContenidoEnSeccion(2,event.target.value);
+    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    // } );
+
+    // document.getElementById("contenidoActividadSeccion3")
+    // .addEventListener('change', (event) =>  {
+    //     establecerContenidoEnSeccion(3,event.target.value);
+    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    // } );
+
+    
+
     //Seccion 1
-    document.getElementById("contenidoActividadSeccion1").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion1);
-    document.getElementById("contenidoActividadSeccion2").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion2);
-    document.getElementById("contenidoActividadSeccion3").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion3);
+    document.getElementById("configuracionSecciones").value=seccionerToCadena(configuracion.actividades.contenidoSecciones);
+    document.getElementById("botonAplicarConfiguracionSecciones")
+    .addEventListener('click', (event) =>  {
+       
+        configuracion.actividades.contenidoSecciones = cadenasSeccionesToArray(document.getElementById("configuracionSecciones").value)
 
-    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
-    document.getElementById("contenidoActividadSeccion1")
-    .addEventListener('change', (event) =>  {
-        establecerContenidoEnSeccion(1,event.target.value);
-        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
-    } );
-
-    document.getElementById("contenidoActividadSeccion2")
-    .addEventListener('change', (event) =>  {
-        establecerContenidoEnSeccion(2,event.target.value);
-        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
-    } );
-
-    document.getElementById("contenidoActividadSeccion3")
-    .addEventListener('change', (event) =>  {
-        establecerContenidoEnSeccion(3,event.target.value);
         graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
     } );
 
