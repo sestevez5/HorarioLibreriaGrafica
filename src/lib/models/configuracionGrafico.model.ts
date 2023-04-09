@@ -47,7 +47,7 @@ export interface ConfiguracionGrafico {
   }
 
   actividades?: {
-    tamanyoTexto: string;
+    tamanyoTexto?: string;
     porcentajeZonaSeleccionActividad: number | undefined;
     altoSeccionPie: number | undefined;
     colores: string[];

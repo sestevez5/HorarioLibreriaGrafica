@@ -12,19 +12,27 @@ import { HorarioG } from './lib/root'
 // DATOS
 //--------------------------------------------------------------
 
-// 1.- conficuración de la semana
+    
+var configuracionPorDefecto;
+var graficoHorario;
+
+
+
+
+// 1.- conficuración grafico
 var configuracion = {
   configuracionSemana: {
     horaMinima: '08:00',
     horaMaxima: '14:00',
-    diasSemanaHabiles: ['L','M','X','J','V'],
+    diasSemanaHabiles: ['L','M','X','J','V']
 
   },
 
   actividades: {
-    mostrarPanelAcciones: true,
-    tamanyoTexto: '13',
-    contenidoSecciones: ["GRU","DOC"], // Cadenas posibles: 'DEPENDENCIAS'. 'DOCENTES', 'CONTENIDO_LECTIVO', 'GRUPOS'
+    //tamanyoTexto: '54'
+     // mostrarPanelAcciones: true,
+    // contenidoSecciones: ["GRU","DOC","DEP"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
+    // mostrarSeccionPie: false
   },
   panelSesiones: {
     alto:1,
@@ -34,8 +42,7 @@ var configuracion = {
 }
 
 
-// Paso 2: Instanciamos un objeto horario.
-var graficoHorario = new HorarioG('div#horario');
+
 
 // 2.- plantilla que se rendeizará en el gráfico (Colecció de sesiones)
 var plantilla =  {
@@ -541,7 +548,7 @@ var actividades = [
           denominacionLarga: 'Aula 3.1'
       },
 
-      detalleActividad: "Se imparte en el Gimnasio"
+      detalleActividad: ""
 
   },
 
@@ -1594,55 +1601,6 @@ function establecerActividadActual(actividad) {
 
 }
 
-function establecerContenidoEnSeccion(numeroSeccion, valor) {
-
-    switch (valor) {
-        case '1':
-            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'GRUPOS'
-        break;
-
-        case '2':
-            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'DOCENTES'
-        break;
-
-        case '3':
-            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'DEPENDENCIAS'
-        break;
-
-        case '4':
-            configuracion.actividades.contenidoSecciones['seccion'+numeroSeccion] = 'CONTENIDO_LECTIVO'
-        break;
-    
-        default:
-            break;
-    }
-
-}
-
-function obtenerElementoSelector(entidadSeccion){
-
-    switch (entidadSeccion) {
-        case 'DEPENDENCIAS':
-            return 3
-        break;
-
-        case 'GRUPOS':
-            return 1
-        break;
-
-        case 'DOCENTES':
-            return 2
-        break;
-
-        case 'CONTENIDO_LECTIVO':
-            return 4
-        break;
-    
-        default:
-            break;
-    }
-
-}
 
 function cadenasSeccionesToArray( cadenaSecciones) {
     const cadenasPosibles=['DOC','GRU','DEP','CON'];
@@ -1660,7 +1618,7 @@ function cadenasSeccionesToArray( cadenaSecciones) {
             cadenas.push(v)
         }
         else{
-            console.log('cadenas break',cadenas)
+ 
            break;
         }
         
@@ -1688,17 +1646,27 @@ function iniciarParametros(){
     //----------------------------------------------------------
     // Configuración parámetro: mostrarBotonesAccionActividad 
     //----------------------------------------------------------
-    document.getElementById("mostrarBotonesAccionActividad").checked=configuracion.actividades?.mostrarPanelAcciones?configuracion.actividades.mostrarPanelAcciones:null;
+    document.getElementById("mostrarBotonesAccionActividad").checked=configuracion.actividades?.mostrarPanelAcciones?configuracion.actividades.mostrarPanelAcciones:configuracionPorDefecto.actividades?.mostrarPanelAcciones;
 
     // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
     document.getElementById("mostrarBotonesAccionActividad")
     .addEventListener('input', (event) =>  {
-
         configuracion.actividades.mostrarPanelAcciones=event.target.checked;
-
         graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
     } );
 
+    //----------------------------------------------------------
+    // Configuración parámetro: mostrarBotonesAccionActividad 
+    //----------------------------------------------------------
+    document.getElementById("mostrarDetalleActividad").checked=configuracion.actividades.mostrarSeccionPie?configuracion.actividades.mostrarSeccionPie:configuracionPorDefecto.actividades.mostrarSeccionPie;
+
+    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    document.getElementById("mostrarDetalleActividad")
+    .addEventListener('input', (event) =>  {
+        configuracion.actividades.mostrarSeccionPie=event.target.checked;
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+    
 
     //----------------------------------------------------------
     // Configuración parámetros: mostrarDia 
@@ -1706,7 +1674,7 @@ function iniciarParametros(){
     Array.prototype.filter.call(document.getElementsByClassName("mostrarDia"), function(element){
 
         //Establecemos valores iniciales de los elementos del DOM (días) en base a la configuración
-        element.checked=configuracion.configuracionSemana?.diasSemanaHabiles?configuracion.configuracionSemana.diasSemanaHabiles.includes(element.id)?true:false:null;
+        element.checked=configuracion.configuracionSemana?.diasSemanaHabiles?configuracion.configuracionSemana.diasSemanaHabiles.includes(element.id)?true:false:configuracionPorDefecto.configuracionSemana.diasSemanaHabiles.includes(element.id)?true:false;
 
         //Establecemos la reacción ante la selección/deselección de los elementos (días)
         element.addEventListener('input', (event) =>  {
@@ -1726,11 +1694,11 @@ function iniciarParametros(){
     //----------------------------------------------------------
     // Configuración parámetros: tamanyoTexto 
     //----------------------------------------------------------
-    if (configuracion.actividades?.tamanyoTexto)
-    {
-        document.getElementById("tamanyoTexto").value=configuracion.actividades.tamanyoTexto;
-        document.getElementById("valorTamanyoTexto").innerHTML=configuracion.actividades.tamanyoTexto;
-    }
+
+    configuracion.actividades.mostrarSeccionPie?configuracion.actividades.mostrarSeccionPie:configuracionPorDefecto.actividades.mostrarSeccionPie;
+
+    document.getElementById("tamanyoTexto").value=configuracion.actividades.tamanyoTexto?configuracion.actividades.tamanyoTexto:configuracionPorDefecto.actividades.tamanyoTexto;
+    document.getElementById("valorTamanyoTexto").innerHTML=configuracion.actividades.tamanyoTexto?configuracion.actividades.tamanyoTexto:configuracionPorDefecto.actividades.tamanyoTexto;
     
     document.getElementById("tamanyoTexto")
     .addEventListener('input', (event) =>  {
@@ -1807,38 +1775,9 @@ function iniciarParametros(){
     } );
 
 
-    //----------------------------------------------------------
-    // Configuración parámetro: contenidos de las secciones de la actividad
-    //----------------------------------------------------------
-
-    // //Seccion 1
-    // document.getElementById("contenidoActividadSeccion1").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion1);
-    // document.getElementById("contenidoActividadSeccion2").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion2);
-    // document.getElementById("contenidoActividadSeccion3").value=obtenerElementoSelector(configuracion.actividades.contenidoSecciones.seccion3);
-
-    // // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
-    // document.getElementById("contenidoActividadSeccion1")
-    // .addEventListener('change', (event) =>  {
-    //     establecerContenidoEnSeccion(1,event.target.value);
-    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
-    // } );
-
-    // document.getElementById("contenidoActividadSeccion2")
-    // .addEventListener('change', (event) =>  {
-    //     establecerContenidoEnSeccion(2,event.target.value);
-    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
-    // } );
-
-    // document.getElementById("contenidoActividadSeccion3")
-    // .addEventListener('change', (event) =>  {
-    //     establecerContenidoEnSeccion(3,event.target.value);
-    //     graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
-    // } );
-
-    
 
     //Seccion 1
-    document.getElementById("configuracionSecciones").value=seccionerToCadena(configuracion.actividades.contenidoSecciones);
+    document.getElementById("configuracionSecciones").value=configuracion.actividades.contenidoSecciones ? seccionerToCadena(configuracion.actividades.contenidoSecciones) : null;
     document.getElementById("botonAplicarConfiguracionSecciones")
     .addEventListener('click', (event) =>  {
        
@@ -1855,11 +1794,56 @@ function iniciarParametros(){
 
 function init() {  
     
+
+    // Paso 1: Instanciamos un objeto horario y almacenamos la configuración por defecto. En la iniciación de parámetros se aplicará la configuración establecida aqui y, en caso contrario, la estrablecida como valor por defecto.
+    graficoHorario = new HorarioG('div#horario');
+    configuracionPorDefecto = graficoHorario.obtenerConfiguracion();
+
+    // Se inician todos los controles de la interfaz.
+    iniciarParametros();
+
+
+
+    // Paso 3: Subscripción a los observables ofrecidos por el objeto "HorarioG"
+    // 4.1) ESTRATEGIA PARA COMUNICAR AL EXTERIOR LA INTERACCIÓN DEL USUARIO
+    // la interacción de los usuarios con el gráfico se hace uno deprogramación reactiva.
+    // Este paradigma de programación contempla la existencia de artefactos ( observables <emit>) que emiten datos y 
+    // y que pueden ser observaos por los clientes a través del método "Subscribe". Se ha usado la librería "rxjs"
+    // 4.2) INTERACIÓN DEL USUARIO
+    // Se ha modelado 5 formas de interación. Se podrá detectar la intención del usuario de:
+    //  a) Eliminar una actividad
+    //  b) Duplicar una actividad
+    //  c) Mover una actividad
+    //  d) Seleccionar una actividad.
+    //  e) Añadir una actividad a una sesión.
+    // 4.2) INFORMACIÓN OFRECIDA EN LAS SUBSCRIPCIONES.
+    //  a) En las primeras 4 interacción la herramienta cliente dispondrá de la actividad afectada por la interacción.
+    //  b) En la sección anterior "Datos" se podrá observar la estructura del objeto actividad,
+    //  c) En la opción "e) Añadir una actividad a una sesión" se devuelve enla que se desea crear la nueva actividad.
+    //  b) En la sección anterior "Datos" se podrá observar la estructura del objeto sesion. es un nodo interno al objeto "plantilla"
+
+    graficoHorario.eliminarActividad$.subscribe(
+        act => { notificacion('. . . Eliminación la actividad: ' + act.idActividad, act);}
+    );
+
+    graficoHorario.duplicarActividad$.subscribe(
+        act => notificacion('. . . Copiando la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    );
+
+    graficoHorario.moverActividad$.subscribe(
+        act => notificacion('. . . Moviendo la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    );
+
+    graficoHorario.seleccionActividad$.subscribe(
+        act => notificacion('. . . Seleccionado la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    );
+
+    graficoHorario.anyadirActividadEnSesion$.subscribe(
+        ses => notificacion('. . . Añadiendo una actividad en la sesión: '+ses.idSesion, null)
+    );
+
     
-
-
-
-  // Paso 2: Se invoca a su renderizado.
+  // Paso 5: Se invoca a su renderizado.
   // IMPORTANTE: El renderizado depende de dos objetos que se pasarán por parámetro.
   // 1) Objeto de configuración: hora de inicio y fin y días habilitados
   // 2) Plantilla Horaria que se renderizará de fondo. 
@@ -1870,53 +1854,6 @@ function init() {
   //                por ese motivo se ha separado la inclusión de actividades que, a medida que se cambia la entidad de 
   //                referencia se cambia el conjunto de actividades pero no el fondo del gráfico.
   graficoHorario.actualizarActividades(actividades);
-
-
-  // Paso 4: Subscripción a los observables ofrecidos por el objeto "HorarioG"
-  // 4.1) ESTRATEGIA PARA COMUNICAR AL EXTERIOR LA INTERACCIÓN DEL USUARIO
-  // la interacción de los usuarios con el gráfico se hace uno deprogramación reactiva.
-  // Este paradigma de programación contempla la existencia de artefactos ( observables <emit>) que emiten datos y 
-  // y que pueden ser observaos por los clientes a través del método "Subscribe". Se ha usado la librería "rxjs"
-  // 4.2) INTERACIÓN DEL USUARIO
-  // Se ha modelado 5 formas de interación. Se podrá detectar la intención del usuario de:
-  //  a) Eliminar una actividad
-  //  b) Duplicar una actividad
-  //  c) Mover una actividad
-  //  d) Seleccionar una actividad.
-  //  e) Añadir una actividad a una sesión.
-  // 4.2) INFORMACIÓN OFRECIDA EN LAS SUBSCRIPCIONES.
-  //  a) En las primeras 4 interacción la herramienta cliente dispondrá de la actividad afectada por la interacción.
-  //  b) En la sección anterior "Datos" se podrá observar la estructura del objeto actividad,
-  //  c) En la opción "e) Añadir una actividad a una sesión" se devuelve enla que se desea crear la nueva actividad.
-  //  b) En la sección anterior "Datos" se podrá observar la estructura del objeto sesion. es un nodo interno al objeto "plantilla"
-
-  graficoHorario.eliminarActividad$.subscribe(
-      act => { notificacion('. . . Eliminación la actividad: ' + act.idActividad, act);}
-  );
-
-  graficoHorario.duplicarActividad$.subscribe(
-      act => notificacion('. . . Copiando la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
-  );
-
-  graficoHorario.moverActividad$.subscribe(
-      act => notificacion('. . . Moviendo la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
-  );
-
-  graficoHorario.seleccionActividad$.subscribe(
-      act => notificacion('. . . Seleccionado la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
-  );
-
-  graficoHorario.anyadirActividadEnSesion$.subscribe(
-      ses => notificacion('. . . Añadiendo una actividad en la sesión: '+ses.idSesion, null)
-  );
-
-
-
-  iniciarParametros();
-
-
-  
-   
 
  
 }
