@@ -77,8 +77,19 @@ export class HorarioG {
       tamanyoTexto: '10',
       porcentajeZonaSeleccionActividad: 10,
       colores: [],
-      mostrarPanelAcciones:false
+      mostrarPanelAcciones:true,
+      mostrarSeccionPie: true,
+      altoSeccionPie: 10
+
     }
+
+    // altoSeccionPie: number | undefined;
+    // colores: string[];
+    // mostrarPanelAcciones: boolean;
+    // separacionActividades?: number | undefined;
+    // contenidoSecciones?: Array<string>
+    // mostrarSeccionPie: boolean 
+
 
   }
 

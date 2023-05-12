@@ -54,7 +54,7 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     tamanyoTexto: '15',
     porcentajeZonaSeleccionActividad: 4,
     colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
-    mostrarPanelAcciones: true,
+    mostrarPanelAcciones: false,
     mostrarSeccionPie: false,
     contenidoSecciones: ["GRU","DEP","CON"],
     
