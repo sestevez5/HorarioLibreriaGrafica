@@ -45,6 +45,7 @@ export class HorarioG {
         margenSuperiorGrafico:     5,
         margenIzquierdoGrafico:    5,
       },
+      pixelesPorHora: undefined
     },
 
     panelHorario: {

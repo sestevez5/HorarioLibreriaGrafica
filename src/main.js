@@ -21,6 +21,10 @@ var graficoHorario;
 
 // 1.- conficuración grafico
 var configuracion = {
+
+ grafico: {
+    pixelesPorHora:50
+ },
   configuracionSemana: {
     horaMinima: '08:00',
     horaMaxima: '14:00',

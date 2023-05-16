@@ -105,7 +105,8 @@ export class HorarioG {
 
   private establecerParametrosConfiguracion(configuracionGrafico: ConfiguracionGrafico) {
 
-    
+    const MARGENES = 22;
+
     configuracionGrafico.configuracionSemana.diasSemanaHabiles?CONFIGURACION_GRAFICO.configuracionSemana.diasSemanaHabiles = configuracionGrafico.configuracionSemana.diasSemanaHabiles:null;
     configuracionGrafico.configuracionSemana.horaMinima?CONFIGURACION_GRAFICO.configuracionSemana.horaMinima = configuracionGrafico.configuracionSemana.horaMinima:null;
     configuracionGrafico.configuracionSemana.horaMaxima?CONFIGURACION_GRAFICO.configuracionSemana.horaMaxima = configuracionGrafico.configuracionSemana.horaMaxima:null;
@@ -134,7 +135,29 @@ export class HorarioG {
     const factorAncho = CONFIGURACION_GRAFICO.panelSesiones.ancho;
 
     CONFIGURACION_GRAFICO.grafico.anchoGrafico = parseFloat(d3.select(this.elementoRaiz).style('width'))*factorAncho;
-    CONFIGURACION_GRAFICO.grafico.altoGrafico = parseFloat(d3.select(this.elementoRaiz).style('height'))*factorAlto * Math.max(1, rangoEnHoras / 7)-22;
+
+    // IMPORTANTE: El alto puede venir calculado a partir del alto del elemento raiz ( comportamiento por defecto) 
+    // o a través del valor absoluto (en píxeles) del alto correspondiente a una hora.
+    // Para discriminar ambos comportamientos se usa la variable del objeto de configuración pixelesPorHora.
+    // Si dicha variable no se ha definido el alto intenta cubrir el alto del elemento padre que contendrá al SVG. 
+    // En caso contrario se ceñirá al alto indicado por hora multiplicado por el tiempo en horas pasado como parámetro.
+    configuracionGrafico.grafico?.pixelesPorHora?
+
+    CONFIGURACION_GRAFICO.grafico.altoGrafico = configuracionGrafico.grafico.pixelesPorHora*factorAlto*rangoEnHoras-MARGENES:  // Se ha indicado píxeles por hora
+    
+    CONFIGURACION_GRAFICO.grafico.altoGrafico = parseFloat(d3.select(this.elementoRaiz).style('height'))*factorAlto-MARGENES;  // No se ha indicado píxeles por hora.
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    // * Math.max(1, rangoEnHoras / 7)-22;
 
 
     // Establecer dimensiones del panel que contiene las barras.

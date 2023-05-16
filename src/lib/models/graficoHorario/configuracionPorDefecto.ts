@@ -20,6 +20,8 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
       margenSuperiorGrafico:     5,
       margenIzquierdoGrafico:    5,
     },
+
+    pixelesPorHora: undefined
   },
 
   panelHorario: {

@@ -17,6 +17,8 @@ export interface ConfiguracionGrafico {
 
     anchoGrafico:  number | undefined;
     altoGrafico:   number | undefined;
+
+    pixelesPorHora: number | undefined;
   }
 
   panelHorario?: {
