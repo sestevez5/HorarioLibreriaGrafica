@@ -73,7 +73,8 @@ export class HorarioG {
     );
 
     Utilidades.calcularFactorAnchoActividadesG(this.actividadesG, this.actividadesG);
-    Utilidades.calcularColoresActividadesG(this.actividadesG);
+   
+    Utilidades.calcularColoresActividadesG(this.actividadesG, CONFIGURACION_GRAFICO.actividades.criterioColoreado);
 
     this.renderizarActividades();
 
@@ -96,8 +97,8 @@ export class HorarioG {
       .attr('height', '100%')
       .attr('id', 'fondografico')
       .attr('fill', CONFIGURACION_GRAFICO.grafico.colorGrafico)
-      .attr('rx', '10')
-      .attr('ry', '10')
+      .attr('rx', '0')
+      .attr('ry', '0')
 
     Utilidades.anyadirDefs(svg);
 
@@ -116,6 +117,7 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.colorCuerpo?CONFIGURACION_GRAFICO.panelSesiones.colorCuerpo = configuracionGrafico.panelSesiones.colorCuerpo:null;
     configuracionGrafico.panelSesiones?.alto?CONFIGURACION_GRAFICO.panelSesiones.alto = configuracionGrafico.panelSesiones.alto:null;
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
+    configuracionGrafico.actividades?.criterioColoreado?CONFIGURACION_GRAFICO.actividades.criterioColoreado = configuracionGrafico.actividades.criterioColoreado:null;
 
     if(configuracionGrafico.actividades.contenidoSecciones) {
       CONFIGURACION_GRAFICO.actividades.contenidoSecciones=[];
@@ -430,7 +432,7 @@ export class HorarioG {
       .attr('class', 'rectPanelCabeceraSesionActividades')
       .attr('height', altoCabeceraSesion*2)  // Es un artificio para ocultar las esquinas inferiores redondeadas
       .attr('width', anchoSesion)
-      .attr('rx',10)
+      .attr('rx',0)
       .attr('fill', '#ccc');
 
     // Se añade el texto de la cabecera: hora inicio-fin
@@ -834,6 +836,19 @@ export class HorarioG {
       .attr('width', panelSeccionBBox.width+1)
       .attr('fill', actividad.color);
 
+    // Añadimos una línea que separa las secciones verticales de esta nueva sección
+    if (numeroSeccion < CONFIGURACION_GRAFICO.actividades.contenidoSecciones.length)
+    {
+      const lineaFinalSeccion = panelSeccion.append('line')
+      .attr('x1', panelSeccionBBox.width)
+      .attr('y1', 0)
+      .attr('x2',panelSeccionBBox.width)
+      .attr('y2', panelSeccionBBox.height)
+      .attr('stroke-width', '0.5')
+      .attr('stroke', 'grey')  
+
+    }
+
 
     const panelContenidoSeccion = panelSeccion
       .append('g')
@@ -901,12 +916,24 @@ export class HorarioG {
     const separacionEnteFilas = altoTexto/3;
     const dps = panelContenidoSeccion.node().parentNode.getBBox();
 
+    // Cálculo del valor de y 
+    const altoPanel=dps.height;
+    const margenInicial = 0;
+    const altoFila=altoTexto+separacionEnteFilas;
+    const altoContenido = listaCadenas.length*altoFila;
+    const posicionYInicialCalculada = margenInicial + (altoPanel - altoContenido)/2;
+    const posicionYInicial = posicionYInicialCalculada > 0 ? posicionYInicialCalculada : 0;
+
+
     for (let index = 0; index < listaCadenas.length; index++) {
       const item = listaCadenas[index];
+      
+      var posicionVerticalCadena=(index) * (altoTexto + separacionEnteFilas)+(dps.height/2+(listaCadenas.length-1) * (altoTexto + separacionEnteFilas));
+      posicionVerticalCadena = posicionYInicial + (index)*altoFila;
       panelContenidoSeccion.append('text')
         .attr('x', dps.width / 2)
         .text((d: any, i: any, n: any) => item)
-        .attr('y', (index) * (altoTexto + separacionEnteFilas))
+        .attr('y', posicionVerticalCadena)
         .attr('font-size', CONFIGURACION_GRAFICO.actividades.tamanyoTexto)
         .attr('fill', 'black')
         .attr('dominant-baseline', 'text-before-edge')

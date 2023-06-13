@@ -55,12 +55,12 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
   actividades: {
     tamanyoTexto: '15',
     porcentajeZonaSeleccionActividad: 4,
-    colores: ['#bde8ef','#ffd4e5','#feffa2','#e0cdff','#fdfd96'],
+    colores: ['#e4fbc3','#ffd8c1','#e0c1ff','#c1ffff','#c1ffd1','#c1d1ff','#f7ffc1','#f7ffc1'],
     mostrarPanelAcciones: false,
     mostrarSeccionPie: false,
     contenidoSecciones: ["GRU","DEP","CON"],
-    
-    altoSeccionPie: 15
+    altoSeccionPie: 15,
+    criterioColoreado: 'TIPO_ACTIVIDAD' // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO, GRUPOS
     }
   }
 

@@ -130,7 +130,117 @@ export class Utilidades
     });
 
   }
-  static calcularColoresActividadesG(actsG: ActividadG[]) {
+  static calcularColoresActividadesG(actsG: ActividadG[], criterioColoreado: string) {
+
+    switch (criterioColoreado) {
+      case 'TIPO_ACTIVIDAD':
+        this.colorearActividadesPorTipoActividad(actsG);
+      break;
+
+      case 'CONTENIDO':
+        this.colorearActividadesPorContenido(actsG);
+      break;
+
+      case 'GRUPOS':
+        this.colorearActividadesPorGrupos(actsG);
+      break;
+    
+      default:
+        this.colorearActividadesPorTipoActividad(actsG);
+      break;
+    }
+
+
+
+
+   
+
+  }
+
+  private static colorearActividadesPorGrupos(actsG: ActividadG[]) {
+
+    const grupos: string[] = [];
+
+    var diccionarioGruposActividades: { [index: string]: string;} = {}
+
+
+    // Localizamos todos los diferentes tipos de tipos de actividad y los registramos en TiposActividad.
+    actsG.forEach(
+      actG => {
+
+        var gruposActividadActual: string ='-';
+
+        // Construímos una cadena con todos los códigos de las materias incluidas en la colección de actividades.
+        actG.grupos.sort((gru1, gru2) => gru1.codigo < gru2.codigo ? 1 : 0).forEach(
+          grupos => gruposActividadActual += grupos.codigo
+        )
+
+        //console.log(contenidoActividadActual);
+
+        // Añadimos el par <idActividad. contenidoActividadActual> al diccionario
+        diccionarioGruposActividades[actG.idActividad]=gruposActividadActual;
+        // En el caso de que aún no se haya encontrado un contenido en la lista de contenidos se añade como nuevo elemento.
+        if (!grupos.some(grupos => grupos === gruposActividadActual))
+        { grupos.push(gruposActividadActual) }
+
+
+      });
+
+    for (let index = 0; index < grupos.length; index++) {
+      const gruposActuales = grupos[index];
+
+      actsG.filter(actG => diccionarioGruposActividades[actG.idActividad] === gruposActuales).forEach(
+        actG =>  {actG.color = CONFIGURACION_GRAFICO.actividades.colores[index]}
+     
+      );
+
+      console.log(gruposActuales)
+    }
+  }
+
+
+  private static colorearActividadesPorContenido(actsG: ActividadG[]) {
+
+    const contenidos: string[] = [];
+
+    var diccionarioContenidoActividades: { [index: string]: string;} = {}
+
+
+    // Localizamos todos los diferentes tipos de tipos de actividad y los registramos en TiposActividad.
+    actsG.forEach(
+      actG => {
+
+        var contenidoActividadActual: string ='-';
+
+        // Construímos una cadena con todos los códigos de las materias incluidas en la colección de actividades.
+        actG.asignaturas.sort((asi1, asi2) => asi1.codigo < asi2.codigo ? 1 : 0).forEach(
+          cont => contenidoActividadActual += cont.codigo
+        )
+
+        //console.log(contenidoActividadActual);
+
+        // Añadimos el par <idActividad. contenidoActividadActual> al diccionario
+        diccionarioContenidoActividades[actG.idActividad]=contenidoActividadActual;
+        // En el caso de que aún no se haya encontrado un contenido en la lista de contenidos se añade como nuevo elemento.
+        if (!contenidos.some(cont => cont === contenidoActividadActual))
+        { contenidos.push(contenidoActividadActual) }
+
+
+      });
+
+    for (let index = 0; index < contenidos.length; index++) {
+      const contenidoActual = contenidos[index];
+
+      actsG.filter(actG => diccionarioContenidoActividades[actG.idActividad] === contenidoActual).forEach(
+        actG => actG.color = CONFIGURACION_GRAFICO.actividades.colores[index]
+    
+      );
+
+
+    }
+  }
+
+  private static colorearActividadesPorTipoActividad(actsG: ActividadG[]) {
 
     const tiposActividad: string[] = [];
 
@@ -152,8 +262,12 @@ export class Utilidades
 
 
     }
-
   }
+
+
+
+
+
   static desmarcarActividadesComoSeleccionadas(actividades: ActividadG[], identificadoresActividades?: string[], ) {
 
     if (!identificadoresActividades) {
