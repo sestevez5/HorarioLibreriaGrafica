@@ -1,12 +1,12 @@
 // ejecucion durante el desarrollo
 //import { forEachChild } from 'typescript';
-import { HorarioG } from './lib/root'
+//import { HorarioG } from './lib/root'
 
 // Ejecución para prueba externa con vite
 //import { HorarioG } from '../dist/HorarioG.es'
 
 // Ejecución con live-server
-//import { HorarioG } from '../dist/HorarioG.es.js'
+import { HorarioG } from '../dist/HorarioG.es.js'
 
 //--------------------------------------------------------------
 // DATOS
