@@ -35,11 +35,12 @@ var configuracion = {
   actividades: {
     //tamanyoTexto: '54'
     // mostrarPanelAcciones: true,
-    // contenidoSecciones: ["GRU","DOC","DEP"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
+    contenidoSecciones: ["DEP","GRU","DOC"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
     // mostrarSeccionPie: false
+    colores: ['#eee','#3a5326','#a35326']
   },
   panelSesiones: {
-    alto:1,
+    alto:2,
     ancho:1,
     colorCuerpo: '#f4f4f4'
   }
