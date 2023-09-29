@@ -118,6 +118,7 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.alto?CONFIGURACION_GRAFICO.panelSesiones.alto = configuracionGrafico.panelSesiones.alto:null;
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
     configuracionGrafico.actividades?.criterioColoreado?CONFIGURACION_GRAFICO.actividades.criterioColoreado = configuracionGrafico.actividades.criterioColoreado:null;
+    configuracionGrafico.actividades?.colores?CONFIGURACION_GRAFICO.actividades.colores = configuracionGrafico.actividades.colores:null;
 
     if(configuracionGrafico.actividades.contenidoSecciones) {
       CONFIGURACION_GRAFICO.actividades.contenidoSecciones=[];
@@ -206,11 +207,8 @@ export class HorarioG {
     //-------------------------------------------------
     // Definición del panel
     //-------------------------------------------------
-    const anchoG = CONFIGURACION_GRAFICO.grafico.anchoGrafico as number;
-    const altoG = CONFIGURACION_GRAFICO.grafico.altoGrafico as number;
-
-    const coordenadaXPanel = anchoG - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
-    const coordenadaYPanel = altoG - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
+    const coordenadaXPanel = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
+    const coordenadaYPanel = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
     const panelHorario = svg.append('g')
       .attr('id', 'panelHorario')
       .attr('transform', `translate(${coordenadaXPanel},${coordenadaYPanel})`)

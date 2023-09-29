@@ -38,7 +38,8 @@ var configuracion = {
     // mostrarPanelAcciones: true,
     // contenidoSecciones: ["GRU","DOC","DEP"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
     // mostrarSeccionPie: false
-    criterioColoreado: 'CONTENIDO'  //Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
+    criterioColoreado: 'CONTENIDO',  //Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
+    
   },
   panelSesiones: {
     alto:1,

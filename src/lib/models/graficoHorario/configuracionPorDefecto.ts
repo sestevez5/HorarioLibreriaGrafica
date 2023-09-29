@@ -15,10 +15,10 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     altoGrafico: undefined,
     colorGrafico: 'white',
     margenGrafico: {
-      margenInferiorGrafico:     3,
-      margenDerechoGrafico:      3,
-      margenSuperiorGrafico:     5,
-      margenIzquierdoGrafico:    5,
+      margenInferiorGrafico:     30,
+      margenDerechoGrafico:      30,
+      margenSuperiorGrafico:     30,
+      margenIzquierdoGrafico:    50,
     },
 
     pixelesPorHora: undefined
