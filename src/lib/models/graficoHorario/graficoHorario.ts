@@ -116,8 +116,6 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.colorCuerpo?CONFIGURACION_GRAFICO.panelSesiones.colorCuerpo = configuracionGrafico.panelSesiones.colorCuerpo:null;
     configuracionGrafico.panelSesiones?.alto?CONFIGURACION_GRAFICO.panelSesiones.alto = configuracionGrafico.panelSesiones.alto:null;
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
-    configuracionGrafico.actividades?.colores?CONFIGURACION_GRAFICO.actividades.colores = configuracionGrafico.actividades?.colores:null;
-    
 
     if(configuracionGrafico.actividades.contenidoSecciones) {
       CONFIGURACION_GRAFICO.actividades.contenidoSecciones=[];
@@ -163,18 +161,9 @@ export class HorarioG {
 
 
     // Establecer dimensiones del panel que contiene las barras.
-    const anchoG = CONFIGURACION_GRAFICO.grafico.anchoGrafico;
-    const altoG = CONFIGURACION_GRAFICO.grafico.altoGrafico;
-    const margenIzqG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
-    const margenDerG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenDerechoGrafico;
-    const margenInfG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenInferiorGrafico;
-    const margenSupG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
+    CONFIGURACION_GRAFICO.panelHorario.anchoPanelHorario  = CONFIGURACION_GRAFICO.grafico.anchoGrafico * ((100-CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenDerechoGrafico)/100);
+    CONFIGURACION_GRAFICO.panelHorario.altoPanelHorario   = CONFIGURACION_GRAFICO.grafico.altoGrafico * ((100-CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenInferiorGrafico)/100);
 
-
-
-    CONFIGURACION_GRAFICO.panelHorario.anchoPanelHorario  = anchoG  -margenIzqG - margenDerG;
-    CONFIGURACION_GRAFICO.panelHorario.altoPanelHorario  = altoG  -margenInfG - margenSupG;
-  
     // Establecer escala horizontal: Serán bandas que identifiquen a los días de la semana
     CONFIGURACION_GRAFICO.escalas.escalaHorizontal = d3.scaleBand()
       .domain(Utilidades.obtenerDiasSemanaHorario().map(ds=> ds.denominacionLarga))
@@ -206,14 +195,8 @@ export class HorarioG {
     //-------------------------------------------------
     // Definición del panel
     //-------------------------------------------------
-    const anchoG = CONFIGURACION_GRAFICO.grafico.anchoGrafico as number;
-    const altoG = CONFIGURACION_GRAFICO.grafico.altoGrafico as number;
-    const margenIzqG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
-    const margenSupG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
-
-
-    const coordenadaXPanel = margenIzqG;
-    const coordenadaYPanel = margenSupG;
+    const coordenadaXPanel = CONFIGURACION_GRAFICO.grafico.anchoGrafico as number * (CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico / 100);
+    const coordenadaYPanel = CONFIGURACION_GRAFICO.grafico.altoGrafico as number * (CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico / 100);
     const panelHorario = svg.append('g')
       .attr('id', 'panelHorario')
       .attr('transform', `translate(${coordenadaXPanel},${coordenadaYPanel})`)
