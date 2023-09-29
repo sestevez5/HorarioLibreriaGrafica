@@ -163,8 +163,17 @@ export class HorarioG {
 
 
     // Establecer dimensiones del panel que contiene las barras.
-    CONFIGURACION_GRAFICO.panelHorario.anchoPanelHorario  = CONFIGURACION_GRAFICO.grafico.anchoGrafico * ((100-CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenDerechoGrafico)/100);
-    CONFIGURACION_GRAFICO.panelHorario.altoPanelHorario   = CONFIGURACION_GRAFICO.grafico.altoGrafico * ((100-CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenInferiorGrafico)/100);
+    const anchoG = CONFIGURACION_GRAFICO.grafico.anchoGrafico;
+    const altoG = CONFIGURACION_GRAFICO.grafico.altoGrafico;
+
+    const margeDerG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenDerechoGrafico;
+    const margeIzqG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
+    const margeSupG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
+    const margeInfG = CONFIGURACION_GRAFICO.grafico.margenGrafico.margenInferiorGrafico;
+
+
+    CONFIGURACION_GRAFICO.panelHorario.anchoPanelHorario  = anchoG - margeIzqG - margeDerG;
+    CONFIGURACION_GRAFICO.panelHorario.altoPanelHorario   = altoG - margeSupG - margeInfG;
 
     // Establecer escala horizontal: Serán bandas que identifiquen a los días de la semana
     CONFIGURACION_GRAFICO.escalas.escalaHorizontal = d3.scaleBand()
@@ -197,8 +206,11 @@ export class HorarioG {
     //-------------------------------------------------
     // Definición del panel
     //-------------------------------------------------
-    const coordenadaXPanel = CONFIGURACION_GRAFICO.grafico.anchoGrafico as number * (CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico / 100);
-    const coordenadaYPanel = CONFIGURACION_GRAFICO.grafico.altoGrafico as number * (CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico / 100);
+    const anchoG = CONFIGURACION_GRAFICO.grafico.anchoGrafico as number;
+    const altoG = CONFIGURACION_GRAFICO.grafico.altoGrafico as number;
+
+    const coordenadaXPanel = anchoG - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenIzquierdoGrafico;
+    const coordenadaYPanel = altoG - CONFIGURACION_GRAFICO.grafico.margenGrafico.margenSuperiorGrafico;
     const panelHorario = svg.append('g')
       .attr('id', 'panelHorario')
       .attr('transform', `translate(${coordenadaXPanel},${coordenadaYPanel})`)
