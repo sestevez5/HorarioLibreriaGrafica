@@ -1,12 +1,12 @@
 // ejecucion durante el desarrollo
 //import { forEachChild } from 'typescript';
-//import { HorarioG } from './lib/root'
+import { HorarioG } from './lib/root'
 
 // Ejecución para prueba externa con vite
 //import { HorarioG } from '../dist/HorarioG.es'
 
 // Ejecución con live-server
-import { HorarioG } from '../dist/HorarioG.es.js'
+//import { HorarioG } from '../dist/HorarioG.es.js'
 
 //--------------------------------------------------------------
 // DATOS
@@ -38,7 +38,7 @@ var configuracion = {
     // mostrarPanelAcciones: true,
     // contenidoSecciones: ["GRU","DOC","DEP"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
     // mostrarSeccionPie: false
-    criterioColoreado: 'CONTENIDO',  //Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
+    criterioColoreado: 'TIPO_ACTIVIDAD',  //Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
     
   },
   panelSesiones: {
@@ -610,9 +610,10 @@ var actividades = [
     asignaturas: [
         {
             idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-            codigo: 'ING',
-            denominacionLarga: 'Inglés'
+            codigo: 'MII',
+            denominacionLarga: 'Matemáticas I'
         }
+   
 
     ],
 
@@ -1097,544 +1098,384 @@ var actividades = [
         detalleActividad: "Se imparte en el Gimnasio"
 
     },
+    {
+        idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a6',
 
-  {
-      idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a6',
-
-      sesion: {
-          diaSemana: 'L',
-          horaInicio: '09:50',
-          horaFin: '12:55',
-          idSesion: 'P1L2'
-      },
-
-      periodoVigencia: {
-          idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-          denominacion: 'Curso completo',
-          fechaInicio: '20210901',
-          fechaFin: '20220630'
-      },
-
-      tipoActividad: {
-          idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
-          codigo: 'CCM',
-          denominacionLarga: 'Clase colectiva de una materia',
-          obligaDocentes: false,
-          permiteDocentes: true,
-          obligaAsignaturas: false,
-          permiteAsignaturas: true,
-          obligaGrupos: false,
-          permiteGrupos: true,
-          obligaDetalle: false,
-          permiteDetalle: true,
-          esLectiva: true,
-          tipoPredeterminado: true
-
-      },
-
-      docentes: [
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          }
-      ],
-
-      asignaturas: [
-          {
-              idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-              codigo: 'FYQ',
-              denominacionLarga: 'Física y Química'
-          }
-      ],
-
-      grupos: [ 
-          {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
-          codigo: '3ESOB',
-          denominacionLarga: '3º ESO A'
-          }
-      ],
-
-      dependencia: {
-          idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-          codigo: '3.1',
-          denominacionLarga: 'Aula 3.1'
-      },
-
-      detalleActividad: "Se imparte en el Gimnasio"
-
-  },
-
-  {
-    idActividad: '77fc3ad1-da1a-4860-ae35-d8a675fa06a6',
-
-    sesion: {
-        diaSemana: 'L',
-        horaInicio: '09:50',
-        horaFin: '12:55',
-        idSesion: 'P1L2'
-    },
-
-    periodoVigencia: {
-        idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-        denominacion: 'Curso completo',
-        fechaInicio: '20210901',
-        fechaFin: '20220630'
-    },
-
-    tipoActividad: {
-        idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
-        codigo: 'CCM',
-        denominacionLarga: 'Clase colectiva de una materia',
-        obligaDocentes: false,
-        permiteDocentes: true,
-        obligaAsignaturas: false,
-        permiteAsignaturas: true,
-        obligaGrupos: false,
-        permiteGrupos: true,
-        obligaDetalle: false,
-        permiteDetalle: true,
-        esLectiva: true,
-        tipoPredeterminado: true
-
-    },
-
-    docentes: [
-    
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
+        sesion: {
+            diaSemana: 'L',
+            horaInicio: '09:50',
+            horaFin: '12:55',
+            idSesion: 'P1L2'
         },
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
+
+        periodoVigencia: {
+            idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+            denominacion: 'Curso completo',
+            fechaInicio: '20210901',
+            fechaFin: '20220630'
         },
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
+
+        tipoActividad: {
+            idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+            codigo: 'CCM',
+            denominacionLarga: 'Clase colectiva de una materia',
+            obligaDocentes: false,
+            permiteDocentes: true,
+            obligaAsignaturas: false,
+            permiteAsignaturas: true,
+            obligaGrupos: false,
+            permiteGrupos: true,
+            obligaDetalle: false,
+            permiteDetalle: true,
+            esLectiva: true,
+            tipoPredeterminado: true
+
         },
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
-        },
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
-        },
-        {
-            idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-            nombre: 'Santiago',
-            apellido1: 'Estévez',
-            apellido2: 'Hernández',
-            foto: '',
-            alias: 'sesther'
-        }
-    ],
 
-    asignaturas: [
-        {
-            idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-            codigo: 'FYQ',
-            denominacionLarga: 'Física y Química'
-        }
-    ],
-
-    grupos: [ 
-        {
-        idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
-        codigo: '3ESOB',
-        denominacionLarga: '3º ESO A'
-        }
-    ],
-
-    dependencia: {
-        idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-        codigo: '3.1',
-        denominacionLarga: 'Aula 3.1'
-    },
-
-    detalleActividad: "Se imparte en el Gimnasio"
-
-},
-  
-  {
-      idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a5',
-
-      sesion: {
-          diaSemana: 'L',
-          horaInicio: '10:00',
-          horaFin: '10:55',
-          idSesion: 'P1L1'
-      },
-
-      periodoVigencia: {
-          idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-          denominacion: 'Curso completo',
-          fechaInicio: '20210901',
-          fechaFin: '20220630'
-      },
-
-      tipoActividad: {
-          idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
-          codigo: 'CCM',
-          denominacionLarga: 'Clase colectiva de una materia',
-          obligaDocentes: false,
-          permiteDocentes: true,
-          obligaAsignaturas: false,
-          permiteAsignaturas: true,
-          obligaGrupos: false,
-          permiteGrupos: true,
-          obligaDetalle: false,
-          permiteDetalle: true,
-          esLectiva: true,
-          tipoPredeterminado: true
-
-      },
-
-      docentes: [
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          }
-      ],
-
-      asignaturas: [
-          {
-              idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-              codigo: 'FYQ',
-              denominacionLarga: 'Física y Química'
-          }
-      ],
-
-      grupos: [ 
-          {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
-          codigo: '3ESOC',
-          denominacionLarga: '3º ESO A'
-          }
-      ],
-
-      dependencia: {
-          idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-          codigo: '3.1',
-          denominacionLarga: 'Aula 3.1'
-      },
-
-      detalleActividad: "Se imparte en el Gimnasio"
-
-  },
-   
-  {
-      idActividad: '76fc3ad4-da1a-4860-ae35-d8a675fa06a1',
-
-      sesion: {
-          diaSemana: 'M',
-          horaInicio: '11:15',
-          horaFin: '12:10',
-          idSesion: 'P1L4'
-      },
-
-      periodoVigencia: {
-          idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-          denominacion: 'Curso completo',
-          fechaInicio: '20210901',
-          fechaFin: '20220630'
-      },
-
-      tipoActividad: {
-          idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba132',
-          codigo: 'G',
-          denominacionLarga: 'Guardia',
-          obligaDocentes: false,
-          permiteDocentes: true,
-          obligaAsignaturas: false,
-          permiteAsignaturas: true,
-          obligaGrupos: false,
-          permiteGrupos: true,
-          obligaDetalle: false,
-          permiteDetalle: true,
-          esLectiva: true,
-          tipoPredeterminado: true
-
-      },
-
-      docentes: [
-          
-      ],
-
-      asignaturas: [
-         
-      ],
-
-      grupos: [ 
-          {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad811',
-          codigo: '3ESOB',
-          denominacionLarga: '3º ESO B'
-          },
+        docentes: [
             {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad812',
-          codigo: '3ESOA',
-          denominacionLarga: '3º ESO A'
-          },
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
             {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad813',
-          codigo: '3ESOC',
-          denominacionLarga: '3º ESO C'
-          },
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
             {
-          idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad814',
-          codigo: '3ESOD',
-          denominacionLarga: '3º ESO D'
-          }
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            }
+        ],
+
+        asignaturas: [
+            {
+                idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+                codigo: 'FYQ',
+                denominacionLarga: 'Física y Química'
+            }
+        ],
+
+        grupos: [ 
+            {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '3ESOB',
+            denominacionLarga: '3º ESO A'
+            }
+        ],
+
+        dependencia: {
+            idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+            codigo: '3.1',
+            denominacionLarga: 'Aula 3.1'
+        },
+
+        detalleActividad: "Se imparte en el Gimnasio"
+
+    },
+    {
+        idActividad: '77fc3ad1-da1a-4860-ae35-d8a675fa06a6',
+
+        sesion: {
+            diaSemana: 'L',
+            horaInicio: '09:50',
+            horaFin: '12:55',
+            idSesion: 'P1L2'
+        },
+
+        periodoVigencia: {
+            idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+            denominacion: 'Curso completo',
+            fechaInicio: '20210901',
+            fechaFin: '20220630'
+        },
+
+        tipoActividad: {
+            idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+            codigo: 'CCM',
+            denominacionLarga: 'Clase colectiva de una materia',
+            obligaDocentes: false,
+            permiteDocentes: true,
+            obligaAsignaturas: false,
+            permiteAsignaturas: true,
+            obligaGrupos: false,
+            permiteGrupos: true,
+            obligaDetalle: false,
+            permiteDetalle: true,
+            esLectiva: true,
+            tipoPredeterminado: true
+
+        },
+
+        docentes: [
         
-      ],
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            }
+        ],
 
-      dependencia: {
-          idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-          codigo: '3.1',
-          denominacionLarga: 'Aula 3.1'
-      },
+        asignaturas: [
+            {
+                idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+                codigo: 'FYQ',
+                denominacionLarga: 'Física y Química'
+            }
+        ],
 
-      detalleActividad: "Se imparte en el Gimnasio"
+        grupos: [ 
+            {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '3ESOB',
+            denominacionLarga: '3º ESO A'
+            }
+        ],
 
-  },
+        dependencia: {
+            idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+            codigo: '3.1',
+            denominacionLarga: 'Aula 3.1'
+        },
 
-//   {
-//       idActividad: '77fc3ad4-da1a-4860-ae35-d8a675fa06a7',
+        detalleActividad: "Se imparte en el Gimnasio"
 
-//       sesion: {
-//           diaSemana: 'M',
-//           horaInicio: '08:00',
-//           horaFin: '08:55',
-//           idSesion: 'P1M1'
-//       },
+    },
+    {
+        idActividad: '75fc3ad4-da1a-4860-ae35-d8a675fa06a5',
 
-//       periodoVigencia: {
-//           idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-//           denominacion: 'Curso completo',
-//           fechaInicio: '20210901',
-//           fechaFin: '20220630'
-//       },
+        sesion: {
+            diaSemana: 'L',
+            horaInicio: '10:00',
+            horaFin: '10:55',
+            idSesion: 'P1L1'
+        },
 
-//       tipoActividad: {
-//           idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba1aa',
-//           codigo: 'RD',
-//           denominacionLarga: 'Reunión de departamento',
-//           obligaDocentes: false,
-//           permiteDocentes: true,
-//           obligaAsignaturas: false,
-//           permiteAsignaturas: true,
-//           obligaGrupos: false,
-//           permiteGrupos: true,
-//           obligaDetalle: false,
-//           permiteDetalle: true,
-//           esLectiva: true,
-//           tipoPredeterminado: true
+        periodoVigencia: {
+            idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+            denominacion: 'Curso completo',
+            fechaInicio: '20210901',
+            fechaFin: '20220630'
+        },
 
-//       },
+        tipoActividad: {
+            idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba136',
+            codigo: 'CCM',
+            denominacionLarga: 'Clase colectiva de una materia',
+            obligaDocentes: false,
+            permiteDocentes: true,
+            obligaAsignaturas: false,
+            permiteAsignaturas: true,
+            obligaGrupos: false,
+            permiteGrupos: true,
+            obligaDetalle: false,
+            permiteDetalle: true,
+            esLectiva: true,
+            tipoPredeterminado: true
 
-//       docentes: [
-//           {
-//               idDocente: '7880b8c6-6589-482e-92ca-269ef0f6bfe1',
-//               nombre: 'Lucio',
-//               apellido1: 'Benítez',
-//               apellido2: 'Hernández',
-//               foto: '',
-//               alias: 'lbenher'
-//           }
-          
-//       ],
+        },
 
-//       asignaturas: [
-//         {
-//             idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-//             codigo: 'FYQ',
-//             denominacionLarga: 'Física y Química'
-//         }
-//     ],
+        docentes: [
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            },
+            {
+                idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
+                nombre: 'Santiago',
+                apellido1: 'Estévez',
+                apellido2: 'Hernández',
+                foto: '',
+                alias: 'sesther'
+            }
+        ],
 
-//     grupos: [ 
-//         {
-//         idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
-//         codigo: '3ESOB',
-//         denominacionLarga: '3º ESO A'
-//         }
-//     ],
-//       dependencia: {
-//           idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-//           codigo: '3.1',
-//           denominacionLarga: 'Aula 3.1'
-//       },
+        asignaturas: [
+            {
+                idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
+                codigo: 'FYQ',
+                denominacionLarga: 'Física y Química'
+            }
+        ],
 
-//       detalleActividad: "Reunión de departamento"
+        grupos: [ 
+            {
+            idGrupo: 'c93eeb67-df6b-4d99-9d52-ecbab0cad82d',
+            codigo: '3ESOC',
+            denominacionLarga: '3º ESO A'
+            }
+        ],
 
-//   },
+        dependencia: {
+            idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
+            codigo: '3.1',
+            denominacionLarga: 'Aula 3.1'
+        },
 
-  
-//   {
-//       idActividad: '78fc3ad4-da1a-4860-ae35-d8a675fa06a9',
+        detalleActividad: "Se imparte en el Gimnasio"
 
-//       sesion: {
-//           diaSemana: 'L',
-//           horaInicio: '08:00',
-//           horaFin: '08:55',
-//           idSesion: 'P1L1'
-//       },
+    },
+    {
+        idActividad: '76fc3ad4-da1a-4860-ae35-d8a675fa06a1',
 
-//       periodoVigencia: {
-//           idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
-//           denominacion: 'Curso completo',
-//           fechaInicio: '20210901',
-//           fechaFin: '20220630'
-//       },
+        sesion: {
+            diaSemana: 'M',
+            horaInicio: '11:15',
+            horaFin: '12:10',
+            idSesion: 'P1L4'
+        },
 
-//       tipoActividad: {
-//           idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba1aa',
-//           codigo: 'RD',
-//           denominacionLarga: 'Reunión de departamento',
-//           obligaDocentes: false,
-//           permiteDocentes: true,
-//           obligaAsignaturas: false,
-//           permiteAsignaturas: true,
-//           obligaGrupos: false,
-//           permiteGrupos: true,
-//           obligaDetalle: false,
-//           permiteDetalle: true,
-//           esLectiva: true,
-//           tipoPredeterminado: true
+        periodoVigencia: {
+            idPeriodoVigencia: 'ab88957d-ef61-46c1-a659-893619ea02e0',
+            denominacion: 'Curso completo',
+            fechaInicio: '20210901',
+            fechaFin: '20220630'
+        },
 
-//       },
+        tipoActividad: {
+            idTipoActividad: 'cf5aa348-2dd8-4645-ada8-7e6db13ba132',
+            codigo: 'G',
+            denominacionLarga: 'Guardia',
+            obligaDocentes: false,
+            permiteDocentes: true,
+            obligaAsignaturas: false,
+            permiteAsignaturas: true,
+            obligaGrupos: false,
+            permiteGrupos: true,
+            obligaDetalle: false,
+            permiteDetalle: true,
+            esLectiva: true,
+            tipoPredeterminado: true
 
-//       docentes: [
-//           {
-//               idDocente: '7880b8c6-6589-482e-92ca-269ef0f6bfe1',
-//               nombre: 'Lucio',
-//               apellido1: 'Benítez',
-//               apellido2: 'Hernández',
-//               foto: '',
-//               alias: 'lbenher'
-//           }
-          
-//       ],
+        },
 
-//       asignaturas: [
-         
-//       ],
+        docentes: [
+            
+        ],
 
-//       grupos: [ 
+        asignaturas: [
+            
+        ],
+
+        grupos: [ 
+            
+            
+        ],
+
+        dependencia: {
         
-//       ],
+        },
 
-//       dependencia: {
-//           idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-//           codigo: '3.1',
-//           denominacionLarga: 'Aula 3.1'
-//       },
+        detalleActividad: "Se imparte en el Gimnasio"
 
-//       detalleActividad: "Reunión de departamento"
+    },
 
-//   },
      
      
 ]
@@ -1747,6 +1588,21 @@ function iniciarParametros(){
     document.getElementById("mostrarDetalleActividad")
     .addEventListener('input', (event) =>  {
         configuracion.actividades.mostrarSeccionPie=event.target.checked;
+        graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
+    } );
+
+    //----------------------------------------------------------
+    // Configuración parámetro: sobrescribirAsignaturas
+    //----------------------------------------------------------
+    document.getElementById("sobrescribirAsignaturas").checked=configuracion.actividades.sobrescribirContenidoAreasPorTipo?configuracion.actividades.sobrescribirContenidoAreasPorTipo:configuracionPorDefecto.actividades.sobrescribirContenidoAreasPorTipo;
+
+    // Gestionamos el evento 'input del parámetro "Activar acciones sobre actividades"
+    document.getElementById("sobrescribirAsignaturas")
+    .addEventListener('input', (event) =>  {
+
+        configuracion.actividades.sobrescribirContenidoAreasPorTipo=event.target.checked;
+        console.log(configuracion.actividades.sobrescribirContenidoAreasPorTipo);
+        
         graficoHorario.renderizarGrafico( configuracion, plantillaAMostrar )
     } );
     

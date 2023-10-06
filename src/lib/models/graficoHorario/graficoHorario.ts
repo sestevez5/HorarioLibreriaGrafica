@@ -1,3 +1,4 @@
+import { ConfiguracionGrafico } from './../configuracionGrafico.model';
 import { ConfiguracionGrafico } from '../configuracionGrafico.model';
 
 import { Actividad } from '../actividad.model';
@@ -113,6 +114,8 @@ export class HorarioG {
     configuracionGrafico.configuracionSemana.horaMaxima?CONFIGURACION_GRAFICO.configuracionSemana.horaMaxima = configuracionGrafico.configuracionSemana.horaMaxima:null;
     CONFIGURACION_GRAFICO.actividades.mostrarPanelAcciones = configuracionGrafico.actividades?.mostrarPanelAcciones? true: false;
     CONFIGURACION_GRAFICO.actividades.mostrarSeccionPie=configuracionGrafico.actividades?.mostrarSeccionPie?true:false;
+    CONFIGURACION_GRAFICO.actividades.sobrescribirContenidoAreasPorTipo=configuracionGrafico.actividades?.sobrescribirContenidoAreasPorTipo?true:false;
+
     configuracionGrafico.actividades?.tamanyoTexto?CONFIGURACION_GRAFICO.actividades.tamanyoTexto = configuracionGrafico.actividades?.tamanyoTexto:null;
     configuracionGrafico.panelSesiones?.colorCuerpo?CONFIGURACION_GRAFICO.panelSesiones.colorCuerpo = configuracionGrafico.panelSesiones.colorCuerpo:null;
     configuracionGrafico.panelSesiones?.alto?CONFIGURACION_GRAFICO.panelSesiones.alto = configuracionGrafico.panelSesiones.alto:null;
@@ -1264,7 +1267,18 @@ export class HorarioG {
       break;
 
       case "CON":
-        return actividad.asignaturas?.map(contenidoLectivo => contenidoLectivo.codigo)
+        {
+
+          if (CONFIGURACION_GRAFICO.actividades?.sobrescribirContenidoAreasPorTipo && actividad.asignaturas?.length===0) {
+           
+            return [actividad.tipoActividad.codigo]
+
+          }
+          
+          console.log('adios');
+          
+          return actividad.asignaturas?.map(contenidoLectivo => contenidoLectivo.codigo);
+        }
       break;
 
       case "DOC":

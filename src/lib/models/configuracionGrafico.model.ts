@@ -56,6 +56,7 @@ export interface ConfiguracionGrafico {
     mostrarPanelAcciones: boolean;
     separacionActividades?: number | undefined;
     contenidoSecciones?: Array<string>
+    sobrescribirContenidoAreasPorTipo: boolean
     mostrarSeccionPie: boolean 
     criterioColoreado?: string // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
 

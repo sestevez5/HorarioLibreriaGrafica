@@ -58,8 +58,9 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     colores: ['#e4fbc3','#ffd8c1','#e0c1ff','#c1ffff','#c1ffd1','#c1d1ff','#f7ffc1','#f7ffc1'],
     mostrarPanelAcciones: false,
     mostrarSeccionPie: false,
-    contenidoSecciones: ["GRU","DEP","CON"],
+    contenidoSecciones: ["GRU","CON","DEP"],
     altoSeccionPie: 15,
+    sobrescribirContenidoAreasPorTipo: true,
     criterioColoreado: 'TIPO_ACTIVIDAD' // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO, GRUPOS
     }
   }
