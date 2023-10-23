@@ -1,4 +1,3 @@
-import { ConfiguracionGrafico } from './../configuracionGrafico.model';
 import { ConfiguracionGrafico } from '../configuracionGrafico.model';
 
 import { Actividad } from '../actividad.model';

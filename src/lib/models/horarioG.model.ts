@@ -80,7 +80,8 @@ export class HorarioG {
       colores: [],
       mostrarPanelAcciones:true,
       mostrarSeccionPie: true,
-      altoSeccionPie: 10
+      altoSeccionPie: 10,
+      sobrescribirContenidoAreasPorTipo: true
 
     }
 
