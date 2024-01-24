@@ -40,36 +40,44 @@
       <div class="seccion seccionCuerpo">
 
         <div class="seccion seccionOpcionesGrafico">
-          <div class="opcion opcionConfiguracionActividades" style="padding: 6px">
 
-            <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionActividades" >Configuracion actividades</p>
-            <div class="opcion opcionMostrarBarra" style="margin-bottom: 15px;">
+          <div class="opcion opcionConfiguracionActividades" style="padding: 6px">
+            <div class="a1">
+              <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionActividades" >Configuracion actividades</p>
+            </div>
+            
+            <div class="a2 checks" style="margin-bottom: 15px; display: flex; justify-content: space-between;">
+       
               <label>
                 <input type="checkbox"  id="mostrarBotonesAccionActividad" />
-                       <span>Mostrar barra botones</span>
+                       <span>Barra botones</span>
               </label>
               <br>
 
               <label>
                 <input type="checkbox"  id="mostrarDetalleActividad" />
-                       <span>Mostrar detalle de las actividades</span>
+                       <span>Detalle de las actividades</span>
               </label>
 
               <br>
 
               <label>
                 <input type="checkbox"  id="sobrescribirAsignaturas" />
-                       <span>Mostrar tipo de actividad si no hay contenido lectivo</span>
+                       <span>Tipo de actividad</span>
               </label>
-
+           
+            </div>
+          
+            <div class="a3">
+            
               <div class="opcion opcionTamanyoLetra" >
-                <div class="opcionSlider">
-                  <div class="etiquetaSlider">Tamaño texto:</div>
-                  <div class="slider"  style="max-height: 20px;">
-                    <input id="tamanyoTexto" type="range" min="5" max="30" step="1">
-                  </div>
-                  <div class="valorSlider" id="valorTamanyoTexto"></div>
-                </div>
+                      <div class="opcionSlider">
+                        <div class="etiquetaSlider">Tamaño texto:</div>
+                        <div class="slider"  style="max-height: 20px;">
+                          <input id="tamanyoTexto" type="range" min="5" max="30" step="1">
+                        </div>
+                        <div class="valorSlider" id="valorTamanyoTexto"></div>
+                      </div>
               </div>
 
               <div class="opcion opcionAltoSesiones" >
@@ -91,42 +99,6 @@
                   <div class="valorSlider" id="valorAnchoSesiones"></div>
                 </div>
               </div>
-<!-- 
-              <div class="opcion opcionConfiguracionSecciones" >
-                <div class="Seccion1">
-                  <label>Contenido sección 1:</label>
-                  <select id="contenidoActividadSeccion1" class="browser-default">
-                    <option value="" disabled selected>Seleccione opción</option>
-                    <option value="1" >Grupos</option>
-                    <option value="2">Docentes</option>
-                    <option value="3">Dependencias</option>
-                    <option value="4">Contenido lectivo</option>
-                  </select>
-                </div>
-                <div class="Seccion2">
-                  <label>Contenido sección 2:</label>
-                  <select id="contenidoActividadSeccion2" class="browser-default">
-                    <option value="" disabled selected>Seleccione opción</option>
-                    <option value="1" >Grupos</option>
-                    <option value="2" >Docentes</option>
-                    <option value="3" >Dependencias</option>
-                    <option value="4">Contenido lectivo</option>
-                  </select>
-                </div>
-                <div class="Seccion3">
-                  <label>Contenido sección 3:</label>
-                  <select id="contenidoActividadSeccion3" class="browser-default">
-                    <option value="" disabled selected>Seleccione opción</option>
-                    <option value="1" >Grupos</option>
-                    <option value="2" >Docentes</option>
-                    <option value="3">Dependencias</option>
-                    <option value="4" >Contenido lectivo</option>
-                  </select>
-                </div>
-
-           
-            
-              </div> -->
 
               <div style="display: flex;">
               <div class="input-field" style="flex-grow: 1">
@@ -135,20 +107,13 @@
               </div>
               <div  style="margin-left: 10px; display: flex; align-items: center;"><a id="botonAplicarConfiguracionSecciones" class="waves-effect waves-light btn">Aplicar</a></div>
               
+              </div>
+
             </div>
-    
-              <blockquote style="text-align: justify;">
+
+              <!-- <blockquote style="text-align: justify;">
                 Las configuraciones de secciones se establecen a partir de los literales DOC (docentes), DEP (dependencias) , CON (contenido lectivo) y  GRU (grupos) separándolos por comas. Por ejemplo, añadiendo el contenido "DOC, GRU, DEP" se mostrará en la primera seccion "docentes", en la segunda "grupos" y en la tercera "dependencias". El número máximo de cadenas posibles es tres
-              </blockquote>
-
-              
-
-  
-
-    
-              
-            </div>
-
+              </blockquote> -->
           </div>
   
           <div class="opcion opcionConfiguracionSemana">
@@ -214,10 +179,13 @@
             
             <p class="cabeceraSeccionConfiguracion cabeceraSeccionConfiguracionPlantilla">Configuracion plantilla</p>
 
-            <label>
-              <input type="checkbox"  id="mostrarPlantilla" />
-                     <span>Mostrar plantilla</span>
-            </label>
+            <div opcion opcionColorSesiones>
+              <label>
+                <input type="checkbox"  id="mostrarPlantilla" />
+                       <span>Mostrar plantilla</span>
+              </label>
+            </div>
+           
 
             <div class="opcion opcionColorSesiones">
               <label for="icon_prefix">Color de fondo</label>
@@ -226,7 +194,6 @@
 
           </div>
        
-
 
         </div>
    

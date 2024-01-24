@@ -61,7 +61,8 @@ export const CONFIGURACION_GRAFICO: ConfiguracionGrafico = {
     contenidoSecciones: ["GRU","CON","DEP"],
     altoSeccionPie: 15,
     sobrescribirContenidoAreasPorTipo: true,
-    criterioColoreado: 'TIPO_ACTIVIDAD' // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO, GRUPOS
+    criterioColoreado: 'TIPO_ACTIVIDAD', // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO, GRUPOS
+    mostrarMarcaSeleccionActividad: true
     }
   }
 

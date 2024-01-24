@@ -23,10 +23,13 @@ export class HorarioG {
   
 
   // Observables.
-  seleccionActividad$ = new Subject<ActividadG>();    // Emite un valor cuando se selecciona una actividad
+  seleccionActividad$ = new Subject<ActividadG>();
+  sobreActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se selecciona una actividad
   moverActividad$ = new Subject<ActividadG>();        // Emite un valor cuando se intenta mover una actividad
   duplicarActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se intenta duplicar una actividad
   eliminarActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se intenta eliminar una actividad
+  sobrerActividad = new Subject<ActividadG>(); 
+  Actividad$ = new Subject<ActividadG>();     // Emite un valor cuando se intenta eliminar una actividad
   anyadirActividadEnSesion$ = new Subject<Sesion>();  // Emite un valor cuando se intenta añadir una actividad en la misma sesión que la actividad seleccionada
 
 
@@ -121,6 +124,7 @@ export class HorarioG {
     configuracionGrafico.panelSesiones?.ancho?CONFIGURACION_GRAFICO.panelSesiones.ancho = configuracionGrafico.panelSesiones.ancho:null;
     configuracionGrafico.actividades?.criterioColoreado?CONFIGURACION_GRAFICO.actividades.criterioColoreado = configuracionGrafico.actividades.criterioColoreado:null;
     configuracionGrafico.actividades?.colores?CONFIGURACION_GRAFICO.actividades.colores = configuracionGrafico.actividades.colores:null;
+    configuracionGrafico.actividades?.mostrarMarcaSeleccionActividad?CONFIGURACION_GRAFICO.actividades.mostrarMarcaSeleccionActividad = configuracionGrafico.actividades.mostrarMarcaSeleccionActividad:null;
 
     if(configuracionGrafico.actividades.contenidoSecciones) {
       CONFIGURACION_GRAFICO.actividades.contenidoSecciones=[];
@@ -869,7 +873,7 @@ export class HorarioG {
 
 
 
-    panelSeccion.append('rect')
+    const rectPanelSection = panelSeccion.append('rect')
       .attr('id',  'rectActivarGestionActividad_' + numeroSeccion + '_' + actividad.idActividad )
       .attr('class','rectActivarGestionActividad')
       .attr('height', panelSeccionBBox.height)
@@ -877,8 +881,37 @@ export class HorarioG {
       .attr('opacity', '0')
 
       .on("click", (d: any, i: any, e: any) => {
-          this.seleccionActividad$.next(i);
-       });
+        this.seleccionActividad$.next(i);   
+
+        
+        if (CONFIGURACION_GRAFICO.actividades.mostrarMarcaSeleccionActividad)
+        {
+          d3.select('#circuloActividadSeleccionada').remove();
+          panelActividad.append('circle')
+          .attr('id', 'circuloActividadSeleccionada')
+          .attr('cx', panelActividad.attr('width')-5)
+          .attr('cy', 4)
+          .attr('r', 3)
+          .attr('fill', 'red')    
+        }
+     
+       })
+      .on("mouseover", (d: any, i: any, e: any) => {
+        this.sobreActividad$.next(i);
+        if (CONFIGURACION_GRAFICO.actividades.mostrarMarcaSeleccionActividad)
+        {
+          panelActividad.append('circle')
+          .attr('id', 'circuloActividadSobrevolada')
+          .attr('cx', panelActividad.attr('width')-5)
+          .attr('cy', 4)
+          .attr('r', 3)
+          .attr('fill', 'orange')
+        }
+     })
+     .on("mouseleave", (d: any, i: any, e: any) => {
+       d3.select('#circuloActividadSobrevolada').remove();
+
+   });
 
     const panelContenidolistaCadenas = this.renderizarContenidoPanelesSeccionesActividades(panelContenidoSeccion, listaCadenas);
 

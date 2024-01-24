@@ -33,7 +33,7 @@ div {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 15fr;
+  grid-template-rows: 1fr 20fr;
   padding: 10px;
 }
 
@@ -44,16 +44,10 @@ div {
 }
 
 .seccionCuerpo {
-  grid-row: 2;
-  grid-column: 1;
   display: grid;
-
   grid-template-columns: 1fr;
-  grid-template-rows: 3fr 12fr;
+  grid-template-rows: 1fr 3fr;
   padding: 0px;
-  grid-row: 2;
-  grid-column: 1;
-
   overflow: hidden;
 }
 
@@ -69,7 +63,7 @@ div {
 
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 3fr 3fr 2fr;
+  grid-template-columns: 6fr 3fr 2fr;
   grid-template-rows: 1fr;
 
   
@@ -80,7 +74,7 @@ div {
   grid-row: 2;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 2fr 5fr;
+  grid-template-columns: 3fr 7fr;
   grid-template-rows: 1fr;
 
 }
@@ -163,17 +157,28 @@ input[type=range]{
 }
 
 .opcionConfiguracionActividades {
-  grid-row: 1;
-  grid-column: 1;
   border-right-style: solid;
   border-right-width: 1px;
   padding-right: 10px;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 1;
-  grid-template-rows: 1fr 8fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 5fr;
+}
 
+.a1 {
+  grid-row: 1;
+  grid-column: 1;
+}
 
+.a2 {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.a3 {
+  grid-row: 3;
+  grid-column: 1;
 }
 
 .opcionConfiguracionSemana {
@@ -182,7 +187,7 @@ input[type=range]{
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 4fr 4fr;
+  grid-template-rows: 1fr 2fr 3fr;
   border-right-style: solid;
   border-right-width: 1px;
   padding-right: 10px;
@@ -227,9 +232,7 @@ input[type=range]{
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 8fr;
-  
-
+  grid-template-rows: 1fr 1fr 8fr;
 
 }
 
@@ -241,6 +244,13 @@ input[type=range]{
 
 .opcionColorSesiones {
   grid-row: 2;
+  grid-column: 1;
+
+}
+
+
+.opcionColorSesiones {
+  grid-row: 3;
   grid-column: 1;
 
 }
@@ -274,3 +284,4 @@ input[type=range]{
   display:flex;
   justify-content: space-between;
 }
+

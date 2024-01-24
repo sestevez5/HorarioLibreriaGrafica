@@ -59,6 +59,7 @@ export interface ConfiguracionGrafico {
     sobrescribirContenidoAreasPorTipo: boolean
     mostrarSeccionPie: boolean 
     criterioColoreado?: string // Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
+    mostrarMarcaSeleccionActividad: boolean
 
   }
 

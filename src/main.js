@@ -1,9 +1,9 @@
 // ejecucion durante el desarrollo
 //import { forEachChild } from 'typescript';
-//import { HorarioG } from './lib/root'
+import { HorarioG } from './lib/root'
 
 // Ejecución para prueba externa con vite
-import { HorarioG } from '../dist/HorarioG.es'
+//import { HorarioG } from '../dist/HorarioG.es'
 
 // Ejecución con live-server
 //import { HorarioG } from '../dist/HorarioG.es.js'
@@ -39,6 +39,7 @@ var configuracion = {
     // contenidoSecciones: ["GRU","DOC","DEP"], // Cadenas posibles: 'DEP': dependencias. 'DOC': docentes, 'CON': contenido lectivo, 'GRU': grupos.
     // mostrarSeccionPie: false
     criterioColoreado: 'TIPO_ACTIVIDAD',  //Valores posibles: TIPO_ACTIVIDAD, CONTENIDO
+    mostrarMarcaSeleccionActividad: true
     
   },
   panelSesiones: {
@@ -1775,6 +1776,10 @@ function init() {
 
     graficoHorario.seleccionActividad$.subscribe(
         act => notificacion('. . . Seleccionado la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    );
+
+    graficoHorario.sobreActividad$.subscribe(
+        act => notificacion('. . . Sobrevolando la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
     );
 
     graficoHorario.anyadirActividadEnSesion$.subscribe(
