@@ -24,7 +24,8 @@ export class HorarioG {
 
   // Observables.
   seleccionActividad$ = new Subject<ActividadG>();
-  sobreActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se selecciona una actividad
+  entrandoEnActividad$ = new Subject<ActividadG>(); 
+  saliendoDeActividad$ = new Subject<ActividadG>();    // Emite un valor cuando se selecciona una actividad
   moverActividad$ = new Subject<ActividadG>();        // Emite un valor cuando se intenta mover una actividad
   duplicarActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se intenta duplicar una actividad
   eliminarActividad$ = new Subject<ActividadG>();     // Emite un valor cuando se intenta eliminar una actividad
@@ -853,7 +854,7 @@ export class HorarioG {
       .attr('fill', actividad.color);
 
     // Añadimos una línea que separa las secciones verticales de esta nueva sección
-    if (numeroSeccion < CONFIGURACION_GRAFICO.actividades.contenidoSecciones.length)
+    if (numeroSeccion <= CONFIGURACION_GRAFICO.actividades.contenidoSecciones.length)
     {
       const lineaFinalSeccion = panelSeccion.append('line')
       .attr('x1', panelSeccionBBox.width)
@@ -897,7 +898,7 @@ export class HorarioG {
      
        })
       .on("mouseover", (d: any, i: any, e: any) => {
-        this.sobreActividad$.next(i);
+        this.entrandoEnActividad$.next(i);
         if (CONFIGURACION_GRAFICO.actividades.mostrarMarcaSeleccionActividad)
         {
           panelActividad.append('circle')
@@ -909,6 +910,7 @@ export class HorarioG {
         }
      })
      .on("mouseleave", (d: any, i: any, e: any) => {
+      this.saliendoDeActividad$.next(i);
        d3.select('#circuloActividadSobrevolada').remove();
 
    });

@@ -1,9 +1,9 @@
 // ejecucion durante el desarrollo
 //import { forEachChild } from 'typescript';
-import { HorarioG } from './lib/root'
+//import { HorarioG } from './lib/root'
 
 // Ejecución para prueba externa con vite
-//import { HorarioG } from '../dist/HorarioG.es'
+import { HorarioG } from '../dist/HorarioG.es'
 
 // Ejecución con live-server
 //import { HorarioG } from '../dist/HorarioG.es.js'
@@ -282,10 +282,10 @@ var actividades = [
       idActividad: '616c632e-93d9-496b-b29c-0c39e2d8c6a1',
 
       sesion: {
-          diaSemana: 'L',
-          horaInicio: '08:00',
-          horaFin: '08:55',
-          idSesion: 'P1L1'
+          diaSemana: 'J',
+          horaInicio: '08:55',
+          horaFin: '09:50',
+          idSesion: 'P1J2'
       },
 
       periodoVigencia: {
@@ -313,101 +313,24 @@ var actividades = [
       },
 
       docentes: [
-          {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'sesther'
-          },
-          {
-              idDocente: '7880b8c6-6589-482e-92ca-269ef0f6bfe5',
-              nombre: 'Lucio',
-              apellido1: 'Benítez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'lbenher'
-          },
-          {
-              idDocente: '80e757ea-d6f0-4f22-84c4-0a7b566893a2',
-              nombre: 'José Manuel',
-              apellido1: 'Gómez',
-              apellido2: 'Abreu',
-              foto: '',
-              alias: 'sgomabr'
-          },
-          {
-              idDocente: 'ee8f730e-7e41-4ba5-a1d7-84c807383b72',
-              nombre: 'Carolona',
-              apellido1: 'Pérez',
-              apellido2: 'López',
-              foto: '',
-              alias: 'cperlop'
-          },
-          {
-              idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
-              nombre: 'Edita',
-              apellido1: 'Martín',
-              apellido2: 'Sanabria',
-              foto: '',
-              alias: 'emarsan'
-          },
+       
           {
               idDocente: '02cd8ece-e7c9-40a7-a8a0-d661ff7aa996',
               nombre: 'Lucía',
               apellido1: 'Dorta',
               apellido2: 'Dorta',
               foto: '',
-              alias: 'ldordor'
-          }, {
-              idDocente: '387a0e4e-4eef-4736-85ac-4236f72e03c3',
-              nombre: 'Santiago',
-              apellido1: 'Estévez',
-              apellido2: 'Hernández',
-              foto: '',
               alias: 'sesther'
           },
+           
           {
-              idDocente: '7880b8c6-6589-482e-92ca-269ef0f6bfe5',
-              nombre: 'Lucio',
-              apellido1: 'Benítez',
-              apellido2: 'Hernández',
-              foto: '',
-              alias: 'lbenher'
-          },
-          {
-              idDocente: '80e757ea-d6f0-4f22-84c4-0a7b566893a2',
-              nombre: 'José Manuel',
-              apellido1: 'Gómez',
-              apellido2: 'Abreu',
-              foto: '',
-              alias: 'sgomabr'
-          },
-          {
-              idDocente: 'ee8f730e-7e41-4ba5-a1d7-84c807383b72',
-              nombre: 'Carolona',
-              apellido1: 'Pérez',
-              apellido2: 'López',
-              foto: '',
-              alias: 'cperlop'
-          },
-          {
-              idDocente: 'f935e30d-7d90-411c-86c6-3618a8cea0f9',
-              nombre: 'Edita',
-              apellido1: 'Martín',
-              apellido2: 'Sanabria',
-              foto: '',
-              alias: 'emarsan'
-          },
-          {
-              idDocente: '02cd8ece-e7c9-40a7-a8a0-d661ff7aa996',
-              nombre: 'Lucía',
-              apellido1: 'Dorta',
-              apellido2: 'Dorta',
-              foto: '',
-              alias: 'ldordor'
-          },
+            idDocente: '02cd8ece-e7c9-40a7-a8a0-d661ff7aa996',
+            nombre: 'Lucía',
+            apellido1: 'Dorta',
+            apellido2: 'Dorta',
+            foto: '',
+            alias: 'afumfer'
+        },
 
 
       ],
@@ -415,13 +338,13 @@ var actividades = [
       asignaturas: [
           {
               idAsignatura: '03fb8932-2b7f-4c9c-89c8-3242e30f9ebb',
-              codigo: 'MII',
-              denominacionLarga: 'Matemáticas I'
+              codigo: 'MAT',
+              denominacionLarga: 'Matemáticas'
           },
           {
               idAsignatura: '21c88887-aa1b-4e67-b915-62674e1c478c',
-              codigo: 'MI2',
-              denominacionLarga: 'Matemáticas II'
+              codigo: 'FYQ',
+              denominacionLarga: 'Física y Química'
           },
 
       ],
@@ -552,8 +475,8 @@ var actividades = [
 
       dependencia: {
           idDependencia: 'f217df71-a791-4439-ad5e-3460dd8b17f3',
-          codigo: '3.1',
-          denominacionLarga: 'Aula 3.1'
+          codigo: 'CA01',
+          denominacionLarga: 'Cancha 1'
       },
 
       detalleActividad: ""
@@ -1778,8 +1701,11 @@ function init() {
         act => notificacion('. . . Seleccionado la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
     );
 
-    graficoHorario.sobreActividad$.subscribe(
-        act => notificacion('. . . Sobrevolando la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    graficoHorario.entrandoEnActividad$.subscribe(
+        act => notificacion('. . . Entrando en la actividad actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
+    );
+    graficoHorario.saliendoDeActividad$.subscribe(
+        act => notificacion('. . . Saliendo de la actividad <' + act.idActividad + '> a la sesión <' + act.sesion.idSesion + '>', act)
     );
 
     graficoHorario.anyadirActividadEnSesion$.subscribe(

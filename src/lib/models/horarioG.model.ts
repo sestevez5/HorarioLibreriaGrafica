@@ -81,7 +81,8 @@ export class HorarioG {
       mostrarPanelAcciones:true,
       mostrarSeccionPie: true,
       altoSeccionPie: 10,
-      sobrescribirContenidoAreasPorTipo: true
+      sobrescribirContenidoAreasPorTipo: true,
+      mostrarMarcaSeleccionActividad: true
 
     }
 
