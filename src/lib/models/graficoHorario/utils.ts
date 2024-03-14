@@ -175,7 +175,7 @@ export class Utilidades
           grupos => gruposActividadActual += grupos.codigo
         )
 
-        //console.log(contenidoActividadActual);
+        
 
         // Añadimos el par <idActividad. contenidoActividadActual> al diccionario
         diccionarioGruposActividades[actG.idActividad]=gruposActividadActual;
@@ -194,7 +194,7 @@ export class Utilidades
      
       );
 
-      console.log(gruposActuales)
+      
     }
   }
 
@@ -217,7 +217,7 @@ export class Utilidades
           cont => contenidoActividadActual += cont.codigo
         )
 
-        //console.log(contenidoActividadActual);
+        
 
         // Añadimos el par <idActividad. contenidoActividadActual> al diccionario
         diccionarioContenidoActividades[actG.idActividad]=contenidoActividadActual;

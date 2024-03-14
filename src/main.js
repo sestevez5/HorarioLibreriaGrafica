@@ -1473,7 +1473,6 @@ function cadenasSeccionesToArray( cadenaSecciones) {
         
     }
 
-    console.log('cadenas fuera break',cadenas)
 
     return cadenas;
 

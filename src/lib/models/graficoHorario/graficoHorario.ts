@@ -1308,9 +1308,7 @@ export class HorarioG {
             return [actividad.tipoActividad.codigo]
 
           }
-          
-          console.log('adios');
-          
+                 
           return actividad.asignaturas?.map(contenidoLectivo => contenidoLectivo.codigo);
         }
       break;
