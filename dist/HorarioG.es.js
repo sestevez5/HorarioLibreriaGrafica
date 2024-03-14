@@ -3673,7 +3673,7 @@ class x {
         (o) => {
           o.color = h.actividades.colores[i];
         }
-      ), console.log(a);
+      );
     }
   }
   static colorearActividadesPorContenido(e) {
@@ -4026,7 +4026,7 @@ let Dl = class {
       case "DEP":
         return e.dependencia ? [e.dependencia.codigo] : [];
       case "CON":
-        return h.actividades?.sobrescribirContenidoAreasPorTipo && e.asignaturas?.length === 0 ? [e.tipoActividad.codigo] : (console.log("adios"), e.asignaturas?.map((r) => r.codigo));
+        return h.actividades?.sobrescribirContenidoAreasPorTipo && e.asignaturas?.length === 0 ? [e.tipoActividad.codigo] : e.asignaturas?.map((r) => r.codigo);
       case "DOC":
         return e.docentes?.map((r) => r.alias);
       default:
