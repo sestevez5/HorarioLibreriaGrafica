@@ -1662,7 +1662,7 @@ function init() {
     configuracionPorDefecto = graficoHorario.obtenerConfiguracion();
 
     // Se inician todos los controles de la interfaz.
-    iniciarParametros();
+  
 
 
 
@@ -1723,6 +1723,7 @@ function init() {
   //                por ese motivo se ha separado la inclusión de actividades que, a medida que se cambia la entidad de 
   //                referencia se cambia el conjunto de actividades pero no el fondo del gráfico.
   graficoHorario.actualizarActividades(actividades);
+  console.log('main');
 
  
 }
